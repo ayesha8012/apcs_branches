@@ -1,6 +1,10 @@
 Fruit fruit; 
 int score = 0;
 
+void setup(){
+  size(800, 800); 
+  //Fruit.drawFruit(); 
+}
 
 void keyPressed() {
   if (key == CODED) {

@@ -78,6 +78,3 @@ class Fruit{
     //}
     return false; 
   }
-  void applyGravity(){
-    // apply gravity of PVector
-  }

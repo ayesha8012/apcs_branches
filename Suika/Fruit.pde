@@ -65,16 +65,3 @@ class Fruit{
     t = type; 
   }
 }
-
-  void merge(Fruit a, Fruit b){
-      if (bounce(a, b)){
-        //drawFruit(fruit()); 
-      }
-      // draw new fruit and delete older fruit
-      // update score 
-  }
-  boolean bounce(Fruit a, Fruit b){
-    //if (a.t == b.type){
-    //}
-    return false; 
-  }

@@ -44,11 +44,19 @@ class Fruit{
   public color getColor(){
     return c; 
   }
-  
+
+  public void setX(int xPos) {
+    x = xPos;
+  }
+
   public int getX(){
     return x; 
   }
-  
+
+  pubic void setY(int yPos) {
+    y = yPos;
+  }
+
   public int getY(){
     return y; 
   }

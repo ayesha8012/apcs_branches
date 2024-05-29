@@ -15,46 +15,50 @@ class Fruit{
     y = yPos; 
     t = type; 
   }
-  
-  public int getRad(){
-    return r; 
+
+  public void setStartPos(int startX, int startY){
+    x = startX;
+    y = startY;
   }
-  
+
   public void setRad(int rad){
     r = rad; 
   }
-  
-  public int getMass(){
-    return m; 
+
+  public int getRad(){
+    return r; 
   }
-  
+
   public void setMass(int mass){
     m = mass; 
   }
-    
-  
-  public color getColor(){
-    return c; 
+
+  public int getMass(){
+    return m; 
   }
-  
+
   public void setColor(color col){
     c = col; 
   }
-  
+
+  public color getColor(){
+    return c; 
+  }
+
+  public void setX(int xPos) {
+    x = xPos;
+  }
+
   public int getX(){
     return x; 
   }
-  
-  public void setX(int xPos){
-    x = xPos; 
+
+  public void setY(int yPos) {
+    y = yPos;
   }
-  
+
   public int getY(){
     return y; 
-  }
-  
-  public void setY(int yPos){
-    y = yPos; 
   }
   
   public String getType(){

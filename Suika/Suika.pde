@@ -57,56 +57,56 @@ void drawFruit(Fruit a){
   }
   
 void cherry(){
-  currentFruit = new Fruit(25, 10, color(229, 49, 99), 500, 250, "cherry"); 
+  currentFruit = new Fruit(25, 10, color(248, 30, 30), 500, 250, "cherry"); 
 }
 
 void strawberry(){
-  currentFruit = new Fruit(25, 10, color(255, 0, 0), 500, 250, "strawberry"); 
+  currentFruit = new Fruit(25, 10, color(241, 98, 64), 500, 250, "strawberry"); 
   //drawFruit(strawberry); 
 }
 
 void grape(){
-  currentFruit = new Fruit(25, 10, color(128, 0, 128), 500, 250, "grape"); 
+  currentFruit = new Fruit(25, 10, color(198, 55, 238), 500, 250, "grape"); 
   //drawFruit(grape); 
 }
 
 void tangerine(){
-  currentFruit = new Fruit(25, 10, color(255, 140, 0), 500, 250, "tangerine"); 
+  currentFruit = new Fruit(25, 10, color(234, 172, 41), 500, 250, "tangerine"); 
   //drawFruit(tangerine);
 }
 
 void orange(){
-  currentFruit = new Fruit(25, 10, color(255, 165, 0), 500, 250, "orange"); 
+  currentFruit = new Fruit(25, 10, color(241, 146, 27), 500, 250, "orange"); 
   //drawFruit(orange);
 }
 
 void apple(){
-  currentFruit = new Fruit(25, 10, color(0, 255, 0), 500, 250, "apple"); 
+  currentFruit = new Fruit(25, 10, color(250, 10, 10), 500, 250, "apple"); 
   //drawFruit(apple);
 }
 
 void pear(){
-  currentFruit = new Fruit(25, 10, color(209, 226, 49), 500, 250, "pear"); 
+  currentFruit = new Fruit(25, 10, color(125, 244, 106), 500, 250, "pear"); 
   //drawFruit(pear);
 }
 
 void peach(){
-  currentFruit = new Fruit(25, 10, color(255, 218, 185), 500, 250, "peach"); 
+  currentFruit = new Fruit(25, 10, color(228, 145, 215), 500, 250, "peach"); 
   //drawFruit(peach);
 }
 
 void pineapple(){
-  currentFruit = new Fruit(25, 10, color(255, 223, 0), 500, 250, "pineapple"); 
+  currentFruit = new Fruit(25, 10, color(246, 234, 83), 500, 250, "pineapple"); 
   //drawFruit(pineapple);
 }
 
 void melon(){
-  currentFruit = new Fruit(25, 10, color(240, 128, 128), 500, 250, "melon"); 
+  currentFruit = new Fruit(25, 10, color(158, 241, 118), 500, 250, "melon"); 
   //drawFruit(melon);
 }
 
 void watermelon(){
-  currentFruit = new Fruit(25, 10, color(242, 51, 51), 500, 250, "watermelon"); 
+  currentFruit = new Fruit(25, 10, color(38, 207, 32), 500, 250, "watermelon"); 
   //drawFruit(watermelon);
 }
 

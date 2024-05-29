@@ -16,7 +16,7 @@ class Fruit{
     t = type; 
   }
 
-  public int setStartPos(int startX, int startY){
+  public void setStartPos(int startX, int startY){
     x = startX;
     y = startY;
   }
@@ -53,7 +53,7 @@ class Fruit{
     return x; 
   }
 
-  pubic void setY(int yPos) {
+  public void setY(int yPos) {
     y = yPos;
   }
 

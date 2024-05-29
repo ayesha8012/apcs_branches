@@ -30,7 +30,7 @@ void draw(){
   fill(0); 
   text(score, 40, 40);  
   drawContainer(); 
-  cherry(); 
+  watermelon(); 
   drawFruit(currentFruit); 
   while (currentFruit.getY() - currentFruit.getRad() < 200){
     nextFruit(); 

@@ -4,6 +4,8 @@ String[] types = {"cherry", "strawberry", "grape", "tangerine",
                   "orange", "apple", "pear", "peach", "pineapple", 
                 "melon", "watermelon"};
 int currentFruitIndex = 0; 
+boolean dropped = false;
+int currentMergeIndex = 0;
 
 void setup(){
   size(800, 800); 
@@ -12,28 +14,25 @@ void setup(){
 
 void mousePressed() {
   currentFruit.setX(mouseX);
+  currentFruit.move();
+  currentFruit.applyForce(new PVector(0, 0.5).mult(currentFruit.getMass()));
+  dropped = true;
 }
 
-void keyPressed() {
-  currentFruit.applyGravity();
-}
   
 
 void draw(){
   //next fruit from random list of fruits 
   text(score, 20, 20);
-  background(112, 442, 432);
-  cherry();
   background(255, 229, 180);
   fill(0); 
-  text(score, 40, 40);  
   drawContainer(); 
-  watermelon(); 
   drawFruit(currentFruit); 
-  while (currentFruit.getY() - currentFruit.getRad() < 200){
+  while (dropped == true){
     nextFruit(); 
     drawFruit(currentFruit);
     updateScore(); 
+    dropped = false;
   }
 }
 
@@ -105,21 +104,8 @@ void watermelon(){
   //drawFruit(watermelon);
 }
 
-void applyGravity(){
-    // apply gravity of PVector
-  }
-  
-void nextFruitIndex(){
-  if (currentFruitIndex == 10){
-    currentFruitIndex = 0; 
-  }
-  else {
-    currentFruitIndex++;  
-  }
-}
-  
-void nextFruit(){ 
-  nextFruitIndex(); 
+void nextFruit(){
+  currentFruitIndex = (int)(random(types.length - 6));
   if (currentFruitIndex == 0){
     cherry(); 
   } else if (currentFruitIndex == 1){
@@ -132,16 +118,6 @@ void nextFruit(){
     tangerine(); 
   }  else if (currentFruitIndex == 5){
     orange(); 
-  }  else if (currentFruitIndex == 6){
-    apple(); 
-  }  else if (currentFruitIndex == 7){
-    pear(); 
-  }  else if (currentFruitIndex == 8){
-    pineapple(); 
-  }  else if (currentFruitIndex == 9){
-    melon(); 
-  }  else {
-    watermelon(); 
   }
 }
 
@@ -172,7 +148,7 @@ void updateScore(){
   
 }
 
-void merge(Fruit a, Fruit b){
+boolean merge(Fruit a, Fruit b){
       if (same(a, b)){
         //drawFruit(fruit()); 
         // delete previous fruits 

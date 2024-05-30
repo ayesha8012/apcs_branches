@@ -106,7 +106,7 @@ void melon(){
 }
 
 void watermelon(){
-  currentFruit = new Fruit(25, 10, color(38, 207, 32), 500, 250, "watermelon"); 
+  currentFruit = new Fruit(39, 10, color(38, 207, 32), 500, 250, "watermelon"); 
   //drawFruit(watermelon);
 }
 

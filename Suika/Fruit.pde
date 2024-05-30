@@ -5,6 +5,10 @@ int x;
 int y;
 String t; 
 
+PVector location;
+PVector velocity;
+PVector acceleration;
+
 class Fruit{
   
    Fruit(int rad, int mass, color col, int xPos, int yPos, String type){
@@ -14,6 +18,15 @@ class Fruit{
     x = xPos; 
     y = yPos; 
     t = type; 
+    location = new PVector(x, y); 
+    velocity = new PVector(5, 5);
+    acceleration = new PVector(0, 0);
+  }
+  
+  void move() {
+    velocity.add(acceleration); 
+    location.add(velocity);
+    acceleration.set(0, 0);
   }
 
   public void setStartPos(int startX, int startY){
@@ -67,5 +80,10 @@ class Fruit{
   
   public void setType(String type){
     t = type; 
+  }
+  
+  void applyForce(PVector force) {
+    PVector f = PVector.div(force, m);
+    acceleration.add(f);
   }
 }

@@ -20,4 +20,5 @@ public class Fruit{
   void applyGravity(){
     // apply gravity of PVector
   }
+  
 }

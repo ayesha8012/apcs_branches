@@ -7,8 +7,7 @@ int currentFruitIndex = 0;
 
 void setup(){
   size(800, 800); 
-  draw(); 
-  
+  draw();  
 }
 
 void mousePressed() {
@@ -19,19 +18,12 @@ void keyPressed() {
   currentFruit.applyGravity();
 }
   
-void setup() {
-  size(800, 800);
-  x = 0;
-  y = 0;
-}
 
 void draw(){
   //next fruit from random list of fruits 
-<<<<<<< HEAD
   text(score, 20, 20);
   background(112, 442, 432);
   cherry();
-=======
   background(255, 229, 180);
   fill(0); 
   text(score, 40, 40);  
@@ -41,12 +33,8 @@ void draw(){
   while (currentFruit.getY() - currentFruit.getRad() < 200){
     nextFruit(); 
     drawFruit(currentFruit);
-    while (keyCode != 's'){
-      dir(); 
-    } 
     updateScore(); 
   }
->>>>>>> refs/remotes/origin/main
 }
 
 void drawContainer(){

@@ -1,13 +1,10 @@
 int r; 
 int m; 
 color c; 
-int x; 
-int y;
+float x; 
+float y;
 String t; 
 
-PVector location;
-PVector velocity;
-PVector acceleration;
 
 class Fruit{
   
@@ -20,7 +17,7 @@ class Fruit{
     t = type; 
     location = new PVector(x, y); 
     velocity = new PVector(5, 5);
-    acceleration = new PVector(0, 0);
+    acceleration = new PVector(0, 0.2);
   }
   
   void move() {
@@ -29,10 +26,6 @@ class Fruit{
     acceleration.set(0, 0);
   }
 
-  public void setStartPos(int startX, int startY){
-    x = startX;
-    y = startY;
-  }
 
   public void setRad(int rad){
     r = rad; 
@@ -64,7 +57,7 @@ class Fruit{
     }
   }
 
-  public int getX(){
+  public float getX(){
     return x; 
   }
 
@@ -72,7 +65,7 @@ class Fruit{
     y = yPos;
   }
 
-  public int getY(){
+  public float getY(){
     return y; 
   }
   

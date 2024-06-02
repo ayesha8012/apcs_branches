@@ -36,6 +36,9 @@ void draw() {
     f.applyForce(new PVector(0, 1).mult(f.m)); 
     f.move();
     f.bounce();
+    f.display();
+    if (isTouching(f) == true) {
+    }
   }
   fill(0);
   text(score, 20, 20);
@@ -52,59 +55,59 @@ void drawContainer(){
 
 Fruit cherry(){
   currentFruitIndex = 0; 
-  return new Fruit(0.5, 0.5, color(248, 30, 30), fruitX, fruitY, 0, 0.1, "cherry"); 
+  return new Fruit(1, 0.5, color(248, 30, 30), fruitX, fruitY, 0, 0.1, "cherry"); 
 }
 
 Fruit strawberry(){
   currentFruitIndex = 1; 
-  return new Fruit(0.75, 0.75, color(241, 98, 64), fruitX, fruitY, 0, 2, "strawberry"); 
+  return new Fruit(2, 0.75, color(241, 98, 64), fruitX, fruitY, 0, 2, "strawberry"); 
 
 }
 
 Fruit grape(){
   currentFruitIndex = 2; 
-  return new Fruit(1, 1, color(198, 55, 238), fruitX, fruitY, 0, 2, "grape"); 
+  return new Fruit(3, 1, color(198, 55, 238), fruitX, fruitY, 0, 2, "grape"); 
 }
 
 Fruit tangerine(){
   currentFruitIndex = 3; 
-  return new Fruit(1.25, 1.25, color(234, 172, 41), fruitX, fruitY, 0, 2, "tangerine"); 
+  return new Fruit(4, 1.25, color(234, 172, 41), fruitX, fruitY, 0, 2, "tangerine"); 
 }
 
 Fruit orange(){
   currentFruitIndex = 4;
-  return new Fruit(1.5, 1.5, color(230, 113, 11), fruitX, fruitY, 0, 2, "orange"); 
+  return new Fruit(5, 1.5, color(230, 113, 11), fruitX, fruitY, 0, 2, "orange"); 
   
 }
 
 Fruit apple(){
   currentFruitIndex = 5; 
-  return new Fruit(1.75, 1.75, color(250, 10, 10), fruitX, fruitY, 0, 2, "apple"); 
+  return new Fruit(6, 1.75, color(250, 10, 10), fruitX, fruitY, 0, 2, "apple"); 
 }
 
 Fruit pear(){
   currentFruitIndex = 6; 
-  return new Fruit(2, 2, color(247, 183, 7), fruitX, fruitY, 0, 2, "pear"); 
+  return new Fruit(7, 2, color(247, 183, 7), fruitX, fruitY, 0, 2, "pear"); 
 }
 
 Fruit peach(){
   currentFruitIndex = 7; 
-  return new Fruit(2.25, 2.25, color(228, 145, 215), fruitX, fruitY, 0, 2, "peach"); 
+  return new Fruit(8, 2.25, color(228, 145, 215), fruitX, fruitY, 0, 2, "peach"); 
 }
 
 Fruit pineapple(){
   currentFruitIndex = 8;
-  return new Fruit(2.5, 2.5, color(247, 220, 84), fruitX, fruitY, 0, 2, "pineapple"); 
+  return new Fruit(9, 2.5, color(247, 220, 84), fruitX, fruitY, 0, 2, "pineapple"); 
 }
 
 Fruit melon(){
   currentFruitIndex = 9; 
-  return new Fruit(2.75, 2.75, color(158, 241, 118), fruitX, fruitY, 0, 2, "melon"); 
+  return new Fruit(10, 2.75, color(158, 241, 118), fruitX, fruitY, 0, 2, "melon"); 
 }
 
 Fruit watermelon(){
   currentFruitIndex = 10; 
-  return new Fruit(3, 3, color(38, 207, 32), fruitX, fruitY, 0, 2, "watermelon");
+  return new Fruit(11, 3, color(38, 207, 32), fruitX, fruitY, 0, 2, "watermelon");
 }
 
 Fruit nextFruit(Fruit f){
@@ -146,5 +149,15 @@ void updateScore(){
   }  else {
     score += 22; 
   }
-  
+}
+
+boolean isTouching(Fruit a) {
+  int col = a.y - a.r - 2;
+  int col2 = a.y - a.r;
+  color border = get(a.x, col2); 
+  color other = get(a.x, col); 
+  if (border == other) {
+    return true;
+  }
+  return false;
 }

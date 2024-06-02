@@ -4,12 +4,12 @@ class Fruit{
   PVector acceleration;
   color c;
   float m; 
-  float r; 
+  int r; 
   String t;
-  float x; 
-  float y; 
+  int x; 
+  int y; 
   
- Fruit(float rad, float mass, int col, float xPos, float yPos, float xVel, float yVel, String type) {  
+ Fruit(int rad, float mass, int col, int xPos, int yPos, float xVel, float yVel, String type) {  
     location = new PVector(x, y); 
     velocity = new PVector(0, 2);
     acceleration = new PVector(0, 0);
@@ -25,7 +25,7 @@ class Fruit{
     r = rad; 
   }
 
-  public float getRad(){
+  public int getRad(){
     return r; 
   }
 
@@ -51,7 +51,7 @@ class Fruit{
     }
   }
 
-  public float getX(){
+  public int getX(){
     return x; 
   }
 
@@ -59,7 +59,7 @@ class Fruit{
     y = yPos;
   }
 
-  public float getY(){
+  public int getY(){
     return y; 
   }
   

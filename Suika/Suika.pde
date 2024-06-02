@@ -1,126 +1,125 @@
-Fruit currentFruit = new Fruit(25, 10, color(248, 30, 30), 500, 250, "cherry"); 
+ArrayList<Fruit> fruits;
+Fruit currentFruit = new Fruit(2, 2, color(248, 30, 30), 500, 250, 0, 2, "cherry"); 
 int score = 0;
 String[] types = {"cherry", "strawberry", "grape", "tangerine", 
                   "orange", "apple", "pear", "peach", "pineapple", 
                 "melon", "watermelon"};
 int currentFruitIndex = 0; 
-boolean dropped = false;
 int currentMergeIndex = 0;
 PVector location = new PVector(mouseX, 250);
-PVector velocity = new PVector(0, 0);
-PVector acceleration = new PVector(0, 0.2);
-int fruitX = 500;
+PVector velocity = new PVector(0, 2);
+PVector acceleration = new PVector(0, 0);
+int fruitX = 100;
 int fruitY = 250;
 
-void setup(){
-  size(800, 800); 
-  draw();  
+void setup() {
+  size(800, 800);
+  fruits = new ArrayList<Fruit>();
 }
 
-void draw(){
-  //next fruit from random list of fruits 
-  //location.add(velocity);
-  //velocity.add(acceleration);
-  text(score, 20, 20);
-  background(255, 229, 180);
-  fill(0); 
-  drawContainer(); 
-  drawFruit(currentFruit); 
-  if (mousePressed) {
-    currentFruit.setX(mouseX);
+void mouseClicked() {
+  if (mouseButton == LEFT) {
+  Fruit fruit = nextFruit(currentFruit);
+  //fruit = watermelon(); 
+  currentFruit = fruit;  
+  fruit.setX(mouseX); 
+  fruits.add(fruit);
+  updateScore(); 
   }
- 
-  //while (dropped == true){
-  //  nextFruit(); 
-  //  drawFruit(currentFruit);
-  //  updateScore(); 
-  //  dropped = false;
-  //}
+}
+
+void draw() {
+  
+  background(255, 229, 180);
+  drawContainer();
+  for (Fruit f : fruits) {
+    f.applyForce(new PVector(0, 1).mult(f.m)); 
+    f.move();
+    f.bounce();
+  }
+  fill(0);
+  text(score, 20, 20);
 }
 
 void drawContainer(){
   stroke(0);
-  strokeWeight(1);
+  strokeWeight(5);
   noFill();
-  rect(100, 100, 600, 650);
+  rect(100, 100, 600, 680);
 
 }
 
-void drawFruit(Fruit a){
-    fill(a.getColor()); 
-    noStroke();
-    ellipse(a.getX() - 100, a.getY() - 100, a.getRad(), a.getRad());
-  }
+
+Fruit cherry(){
+  currentFruitIndex = 0; 
+  return new Fruit(0.5, 0.5, color(248, 30, 30), fruitX, fruitY, 0, 0.1, "cherry"); 
+}
+
+Fruit strawberry(){
+  currentFruitIndex = 1; 
+  return new Fruit(0.75, 0.75, color(241, 98, 64), fruitX, fruitY, 0, 2, "strawberry"); 
+
+}
+
+Fruit grape(){
+  currentFruitIndex = 2; 
+  return new Fruit(1, 1, color(198, 55, 238), fruitX, fruitY, 0, 2, "grape"); 
+}
+
+Fruit tangerine(){
+  currentFruitIndex = 3; 
+  return new Fruit(1.25, 1.25, color(234, 172, 41), fruitX, fruitY, 0, 2, "tangerine"); 
+}
+
+Fruit orange(){
+  currentFruitIndex = 4;
+  return new Fruit(1.5, 1.5, color(230, 113, 11), fruitX, fruitY, 0, 2, "orange"); 
   
-void cherry(){
-  currentFruit = new Fruit(25, 10, color(248, 30, 30), fruitX, fruitY, "cherry"); 
 }
 
-void strawberry(){
-  currentFruit = new Fruit(25, 10, color(241, 98, 64), fruitX, fruitY, "strawberry"); 
-  //drawFruit(strawberry); 
+Fruit apple(){
+  currentFruitIndex = 5; 
+  return new Fruit(1.75, 1.75, color(250, 10, 10), fruitX, fruitY, 0, 2, "apple"); 
 }
 
-void grape(){
-  currentFruit = new Fruit(25, 10, color(198, 55, 238), fruitX, fruitY, "grape"); 
-  //drawFruit(grape); 
+Fruit pear(){
+  currentFruitIndex = 6; 
+  return new Fruit(2, 2, color(247, 183, 7), fruitX, fruitY, 0, 2, "pear"); 
 }
 
-void tangerine(){
-  currentFruit = new Fruit(25, 10, color(234, 172, 41), fruitX, fruitY, "tangerine"); 
-  //drawFruit(tangerine);
+Fruit peach(){
+  currentFruitIndex = 7; 
+  return new Fruit(2.25, 2.25, color(228, 145, 215), fruitX, fruitY, 0, 2, "peach"); 
 }
 
-void orange(){
-  currentFruit = new Fruit(25, 10, color(241, 146, 27), fruitX, fruitY, "orange"); 
-  //drawFruit(orange);
+Fruit pineapple(){
+  currentFruitIndex = 8;
+  return new Fruit(2.5, 2.5, color(247, 220, 84), fruitX, fruitY, 0, 2, "pineapple"); 
 }
 
-void apple(){
-  currentFruit = new Fruit(25, 10, color(250, 10, 10), fruitX, fruitY, "apple"); 
-  //drawFruit(apple);
+Fruit melon(){
+  currentFruitIndex = 9; 
+  return new Fruit(2.75, 2.75, color(158, 241, 118), fruitX, fruitY, 0, 2, "melon"); 
 }
 
-void pear(){
-  currentFruit = new Fruit(25, 10, color(125, 244, 106), fruitX, fruitY, "pear"); 
-  //drawFruit(pear);
+Fruit watermelon(){
+  currentFruitIndex = 10; 
+  return new Fruit(3, 3, color(38, 207, 32), fruitX, fruitY, 0, 2, "watermelon");
 }
 
-void peach(){
-  currentFruit = new Fruit(25, 10, color(228, 145, 215), fruitX, fruitY, "peach"); 
-  //drawFruit(peach);
-}
-
-void pineapple(){
-  currentFruit = new Fruit(25, 10, color(246, 234, 83), fruitX, fruitY, "pineapple"); 
-  //drawFruit(pineapple);
-}
-
-void melon(){
-  currentFruit = new Fruit(25, 10, color(158, 241, 118), fruitX, fruitY, "melon"); 
-  //drawFruit(melon);
-}
-
-void watermelon(){
-  currentFruit = new Fruit(39, 10, color(38, 207, 32), fruitX, fruitY, "watermelon"); 
-  //drawFruit(watermelon);
-}
-
-void nextFruit(){
+Fruit nextFruit(Fruit f){
   currentFruitIndex = (int)(random(types.length - 6));
   if (currentFruitIndex == 0){
-    cherry(); 
+    f =  cherry(); 
   } else if (currentFruitIndex == 1){
-    strawberry(); 
+    f =  strawberry(); 
   }  else if (currentFruitIndex == 2){
-    grape(); 
+    f =  grape(); 
   }  else if (currentFruitIndex == 3){
-    cherry(); 
+    f =  tangerine(); 
   }  else if (currentFruitIndex == 4){
-    tangerine(); 
-  }  else if (currentFruitIndex == 5){
-    orange(); 
-  }
+    f = orange(); 
+  } return f; 
 }
 
 void updateScore(){
@@ -149,23 +148,3 @@ void updateScore(){
   }
   
 }
-
-boolean merge(Fruit a, Fruit b){
-      if (same(a, b)){
-        //drawFruit(fruit()); 
-        // delete previous fruits 
-        // merge them to create new Fruit 
-        // update Score 
-        return true;
-      }
-      else {
-        return false;
-      }
-  }
-
-boolean same(Fruit a, Fruit b){
-    if (a.getType().equals(b.getType())){
-      return true; 
-    }
-    return false; 
-  }

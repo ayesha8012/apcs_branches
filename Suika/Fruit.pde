@@ -1,37 +1,31 @@
-int r; 
-int m; 
-color c; 
-float x; 
-float y;
-String t; 
-
-
 class Fruit{
+  PVector location;
+  PVector velocity;
+  PVector acceleration;
+  color c;
+  float m; 
+  float r; 
+  String t;
+  float x; 
+  float y; 
   
-   Fruit(int rad, int mass, color col, int xPos, int yPos, String type){
-    r = rad; 
-    m = mass; 
+ Fruit(float rad, float mass, int col, float xPos, float yPos, float xVel, float yVel, String type) {  
+    location = new PVector(x, y); 
+    velocity = new PVector(0, 2);
+    acceleration = new PVector(0, 0);
     c = col; 
+    m = mass; 
+    r = rad; 
+    t = type; 
     x = xPos; 
     y = yPos; 
-    t = type; 
-    location = new PVector(x, y); 
-    velocity = new PVector(5, 5);
-    acceleration = new PVector(0, 0.2);
   }
   
-  void move() {
-    velocity.add(acceleration); 
-    location.add(velocity);
-    acceleration.set(0, 0);
-  }
-
-
   public void setRad(int rad){
     r = rad; 
   }
 
-  public int getRad(){
+  public float getRad(){
     return r; 
   }
 
@@ -39,7 +33,7 @@ class Fruit{
     m = mass; 
   }
 
-  public int getMass(){
+  public float getMass(){
     return m; 
   }
 
@@ -52,8 +46,8 @@ class Fruit{
   }
 
   public void setX(int xPos) {
-    if (xPos + 100 > 210 && xPos + 100 < 800){
-    x = xPos + 100;
+    if (xPos + 100 > 210 && xPos < 800){
+    location.x = xPos;
     }
   }
 
@@ -76,10 +70,36 @@ class Fruit{
   public void setType(String type){
     t = type; 
   }
-  
+
+  void move() {
+    velocity.add(acceleration); 
+    location.add(velocity);
+    acceleration.set(0, 0);
+  }
+
+  void bounce() {
+    if (location.x > 700 - 50) {
+        location.x = 700 - 50;
+    } else if (location.x < 150 - r) {
+        location.x = 150 + r;
+    }
+    if (location.y - r > 800 - 50) {
+        location.y = 800 - 50;
+    } else if (location.y + r < 100) {
+        location.y = 100 + r;
+    }
+  }
+
   void applyForce(PVector force) {
     PVector f = PVector.div(force, m);
     acceleration.add(f);
+  }
+
+  void display() {
+    stroke(1);
+    strokeWeight(2);
+    fill(c);
+    ellipse(location.x, location.y, 50 * m, 50 * m);
   }
   
 }

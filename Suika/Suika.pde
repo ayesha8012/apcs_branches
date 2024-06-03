@@ -25,6 +25,9 @@ void mouseClicked() {
   fruit.setX(mouseX); 
   fruits.add(fruit);
   updateScore(); 
+  if (isTouching(fruit)) {
+     fruit.location.y = fruit.location.y - (fruit.getMass() * 50);
+    }
   }
 }
 
@@ -35,10 +38,10 @@ void draw() {
   for (Fruit f : fruits) {
     f.applyForce(new PVector(0, 1).mult(f.m)); 
     f.move();
-    f.bounce();
+    f.bounce(f);
     f.display();
-    if (isTouching(f) == true) {
-    }
+    //if (isTouching(f) == true) {
+    //}
   }
   fill(0);
   text(score, 20, 20);
@@ -152,12 +155,26 @@ void updateScore(){
 }
 
 boolean isTouching(Fruit a) {
-  int col = a.y - a.r - 2;
-  int col2 = a.y - a.r;
+  int col = a.y - (int)(a.m * 50) - 2;
+  int col2 = a.y - (int)(a.m * 50);
   color border = get(a.x, col2); 
   color other = get(a.x, col); 
   if (border == other) {
     return true;
   }
   return false;
+}
+
+void delete(Fruit a) {
+  fill(255, 255, 355);
+  ellipse(location.x, location.y, (a.getMass() * 50), (a.getMass() * 50));
+}
+
+void merge(Fruit a) {
+  color fCol = get(a.x, a.y);
+  color fCol2 = get(a.x, a.y - (int)(a.getMass() * 50) - 5);
+  if (isTouching(a) == true && fCol == fCol2){
+    currentFruitIndex += 1;
+    delete(a);
+  }
 }

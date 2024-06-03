@@ -77,16 +77,16 @@ class Fruit{
     acceleration.set(0, 0);
   }
 
-  void bounce() {
-    if (location.x > 700 - 50) {
-        location.x = 700 - 50;
-    } else if (location.x < 150 - r) {
-        location.x = 150 + r;
+  void bounce(Fruit f) {
+    if (f.location.x > 700 - 30) {
+        f.location.x = 700 - (f.getMass() * 50);
+    } else if (f.location.x < 150 - r) {
+        f.location.x = 150 - 10;
     }
-    if (location.y - r > 800 - 50) {
-        location.y = 800 - 50;
-    } else if (location.y + r < 100) {
-        location.y = 100 + r;
+    if (f.location.y - (f.getMass() * 50) > 800 - (f.getMass() * 50)) {
+        f.location.y = 800 - (f.getMass() * 50) - 2;
+    } else if (f.location.y + (f.getMass() * 50) < 100) {
+        f.location.y = 100 + r;
     }
   }
 

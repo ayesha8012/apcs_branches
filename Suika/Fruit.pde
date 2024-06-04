@@ -88,7 +88,8 @@ class Fruit{
     for (int i = 0 ; i < f.size() - 1; i++) {
     }
     //go through the array 
-    //test to sse 
+    //find the distance between the other fruits and the fruit you just dropped.
+    //if the distance between the two centers is too close, make the y value that distance above
   }
   
 

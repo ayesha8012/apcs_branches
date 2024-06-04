@@ -85,6 +85,8 @@ class Fruit{
   }
 
   void overlap(ArrayList<Fruit> f){
+    for (int i = 0 ; i < f.size() - 1; i++) {
+    }
     //go through the array 
     //test to sse 
   }

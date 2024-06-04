@@ -11,10 +11,16 @@ PVector velocity = new PVector(0, 2);
 PVector acceleration = new PVector(0, 0);
 int fruitX = 250;
 int fruitY = 100;
+int timer = 0;
 
 void setup() {
   size(800, 800);
   fruits = new ArrayList<Fruit>();
+}
+
+
+void draw() {
+  mainBackgroundDisplay();
 }
 
 void mouseClicked() {
@@ -26,26 +32,23 @@ void mouseClicked() {
     fruits.add(fruit);
   }
   updateScore(); 
-  //if (isTouching(fruit)) {
-  //   fruit.location.y = fruit.location.y - (fruit.getMass() * 50);
-  //  }
   }
 }
 
-void draw() {
+
+void mainBackgroundDisplay() {
   background(255, 229, 180);
   drawContainer();
-  strawberry();
   for (Fruit f : fruits) {
     f.display();
     f.bottom();
     f.move();
     f.bottom();
-    //f.bounce(f);
   }
   fill(0);
   text(score, 30, 30);
 }
+
 
 void drawContainer(){
   stroke(0);
@@ -58,59 +61,59 @@ void drawContainer(){
 
 Fruit cherry(){
   currentFruitIndex = 0; 
-  return new Fruit(12, 0.5, color(248, 30, 30), fruitX, fruitY, 0, 0.1, "cherry"); 
+  return new Fruit(12, 3, color(248, 30, 30), fruitX, fruitY, 0, 0.1, "cherry"); 
 }
 
 Fruit strawberry(){
   currentFruitIndex = 1; 
-  return new Fruit(18, 0.75, color(241, 98, 64), fruitX, fruitY, 0, 2, "strawberry"); 
+  return new Fruit(18, 4.5, color(241, 98, 64), fruitX, fruitY, 0, 2, "strawberry"); 
 
 }
 
 Fruit grape(){
   currentFruitIndex = 2; 
-  return new Fruit(25, 1, color(198, 55, 238), fruitX, fruitY, 0, 2, "grape"); 
+  return new Fruit(25, 6.25, color(198, 55, 238), fruitX, fruitY, 0, 2, "grape"); 
 }
 
 Fruit tangerine(){
   currentFruitIndex = 3; 
-  return new Fruit(31, 1.25, color(234, 172, 41), fruitX, fruitY, 0, 2, "tangerine"); 
+  return new Fruit(31, 7.75, color(234, 172, 41), fruitX, fruitY, 0, 2, "tangerine"); 
 }
 
 Fruit orange(){
   currentFruitIndex = 4;
-  return new Fruit(37, 1.5, color(230, 113, 11), fruitX, fruitY, 0, 2, "orange"); 
+  return new Fruit(37, 9.25, color(230, 113, 11), fruitX, fruitY, 0, 2, "orange"); 
   
 }
 
 Fruit apple(){
   currentFruitIndex = 5; 
-  return new Fruit(43, 1.75, color(250, 10, 10), fruitX, fruitY, 0, 2, "apple"); 
+  return new Fruit(43, 10.75, color(250, 10, 10), fruitX, fruitY, 0, 2, "apple"); 
 }
 
 Fruit pear(){
   currentFruitIndex = 6; 
-  return new Fruit(49, 2, color(247, 183, 7), fruitX, fruitY, 0, 2, "pear"); 
+  return new Fruit(49, 12.25, color(247, 183, 7), fruitX, fruitY, 0, 2, "pear"); 
 }
 
 Fruit peach(){
   currentFruitIndex = 7; 
-  return new Fruit(55, 2.25, color(228, 145, 215), fruitX, fruitY, 0, 2, "peach"); 
+  return new Fruit(55, 13.75, color(228, 145, 215), fruitX, fruitY, 0, 2, "peach"); 
 }
 
 Fruit pineapple(){
   currentFruitIndex = 8;
-  return new Fruit(61, 2.5, color(247, 220, 84), fruitX, fruitY, 0, 2, "pineapple"); 
+  return new Fruit(61, 15.25, color(247, 220, 84), fruitX, fruitY, 0, 2, "pineapple"); 
 }
 
 Fruit melon(){
   currentFruitIndex = 9; 
-  return new Fruit(67, 2.75, color(158, 241, 118), fruitX, fruitY, 0, 2, "melon"); 
+  return new Fruit(67, 16.75, color(158, 241, 118), fruitX, fruitY, 0, 2, "melon"); 
 }
 
 Fruit watermelon(){
   currentFruitIndex = 10; 
-  return new Fruit(73, 3, color(38, 207, 32), fruitX, fruitY, 0, 2, "watermelon");
+  return new Fruit(73, 18.25, color(38, 207, 32), fruitX, fruitY, 0, 2, "watermelon");
 }
 
 Fruit nextFruit(Fruit f){
@@ -148,33 +151,18 @@ void updateScore(){
   }  else if (currentFruitIndex == 8){
     score += 18; 
   }  else if (currentFruitIndex == 9){
-    score += 2;
+    score += 20;
   }  else {
     score += 22; 
   }
 }
 
-boolean isTouching(Fruit a) {
-  int col = a.y - (int)(a.getMass() * 50) - 2;
-  int col2 = a.y - (int)(a.getMass() * 50);
-  color border = get(a.x, col2); 
-  color other = get(a.x, col); 
-  if (border == other) {
-    return true;
-  }
-  return false;
-}
-
-void delete(Fruit a) {
-  fill(255, 255, 355);
-  ellipse(location.x, location.y, (a.getMass() * 50), (a.getMass() * 50));
-}
-
-void merge(Fruit a) {
-  color fCol = get(a.x, a.y);
-  color fCol2 = get(a.x, a.y - (int)(a.getMass() * 50) - 5);
-  if (isTouching(a) == true && fCol == fCol2){
-    currentMergeIndex = currentFruitIndex + 1;
-    delete(a);
+void endScreen() {
+  float loc = fruits.get(fruits.size() - 1).location.y;
+  int radius = fruits.get(fruits.size() - 1).getRad();
+  if (loc + radius <= 100) {
+    background(0, 0, 0);
+    textSize(200);
+    text("Game Over", 350, 440);
   }
 }

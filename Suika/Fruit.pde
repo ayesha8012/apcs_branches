@@ -1,7 +1,7 @@
 class Fruit{
   PVector location;
   PVector velocity;
-  PVector acceleration;
+  final PVector acceleration = new PVector(0, 2);
   color c;
   float m; 
   int r; 
@@ -9,10 +9,10 @@ class Fruit{
   int x; 
   int y; 
   
+  
  Fruit(int rad, float mass, int col, int xPos, int yPos, float xVel, float yVel, String type) {  
     location = new PVector(x, y); 
     velocity = new PVector(0, 2);
-    acceleration = new PVector(0, 0);
     c = col; 
     m = mass; 
     r = rad; 
@@ -74,32 +74,29 @@ class Fruit{
   void move() {
     velocity.add(acceleration); 
     location.add(velocity);
-    acceleration.set(0, 0);
   }
-
-  void bounce(Fruit f) {
-    if (f.location.x > 700 - 30) {
-        f.location.x = 700 - (f.getMass() * 50);
-    } else if (f.location.x < 150 - r) {
-        f.location.x = 150 - 10;
-    }
-    if (f.location.y - (f.getMass() * 50) > 800 - (f.getMass() * 50)) {
-        f.location.y = 800 - (f.getMass() * 50) - 2;
-    } else if (f.location.y + (f.getMass() * 50) < 100) {
-        f.location.y = 100 + r;
+  
+  void bottom() {
+    if (location.y + r >= 780) {
+      location.set(location.x, 780 - r);
+      velocity.set(0,0);
+      acceleration.set(0,0);
     }
   }
 
-  void applyForce(PVector force) {
-    PVector f = PVector.div(force, m);
-    acceleration.add(f);
+  void overlap(ArrayList<Fruit> f){
+    for (int i = 0 ; i < f.size() - 1; i++) {
+    }
+    //go through the array 
+    //test to sse 
   }
+  
 
   void display() {
     stroke(1);
     strokeWeight(2);
     fill(c);
-    ellipse(location.x, location.y, 50 * m, 50 * m);
+    ellipse(location.x, location.y, 2*r, 2*r);
   }
   
 }

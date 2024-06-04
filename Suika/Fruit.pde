@@ -3,18 +3,20 @@ class Fruit{
   PVector velocity;
   final PVector acceleration = new PVector(0, 2);
   color c;
-  float m; 
+  float f; 
   int r; 
   String t;
   int x; 
   int y; 
+  boolean overlapped = false;
+  boolean merged = false;
   
   
- Fruit(int rad, float mass, int col, int xPos, int yPos, float xVel, float yVel, String type) {  
+ Fruit(int rad, float face, int col, int xPos, int yPos, float xVel, float yVel, String type) {  
     location = new PVector(x, y); 
     velocity = new PVector(0, 2);
     c = col; 
-    m = mass; 
+    f = face; 
     r = rad; 
     t = type; 
     x = xPos; 
@@ -29,12 +31,12 @@ class Fruit{
     return r; 
   }
 
-  public void setMass(int mass){
-    m = mass; 
+  public void setFace(int face){
+    f = face; 
   }
 
-  public float getMass(){
-    return m; 
+  public float getFace(){
+    return f; 
   }
 
   public void setColor(color col){
@@ -85,11 +87,43 @@ class Fruit{
   }
 
   void overlap(ArrayList<Fruit> f){
+    float current = f.get(f.size() - 1).location.y;
+    float check = 0;
+    float distance = 0;
+    float currRad = f.get(f.size() - 1).getRad();
+    float checkRad = 0;
+    float accDistance = 0;
     for (int i = 0 ; i < f.size() - 1; i++) {
-    }
-    //go through the array 
+      check = f.get(i).location.y;
+      checkRad = f.get(i).getRad();
+      distance = check + current;
+      accDistance = currRad + checkRad;
+      if (distance > accDistance) {
+        current = check + accDistance;
+        overlapped = true;
+ //go through the array 
     //find the distance between the other fruits and the fruit you just dropped.
     //if the distance between the two centers is too close, make the y value that distance above
+
+      }
+    }
+  }
+  
+  //void merge(ArrayList< Fruit> f) {
+  //  if (overlap(f) == true) {
+  //  }
+  //}
+  
+  void roll() {
+  }
+  
+  void bounce() {
+  }
+  
+  void delete() {
+    fruits.remove(fruits.size() - 1);
+    
+    merged = false;
   }
   
 
@@ -98,6 +132,28 @@ class Fruit{
     strokeWeight(2);
     fill(c);
     ellipse(location.x, location.y, 2*r, 2*r);
+    if (currentFruitIndex == 0 || currentFruitIndex == 3 || currentFruitIndex == 6 || currentFruitIndex == 9) {
+      fill(0, 0, 0);
+      ellipse(location.x + f, location.y - f, f * 0.6, f * 0.6);
+      ellipse(location.x - f, location.y - f, f * 0.6, f * 0.6);
+      fill(255, 255, 255);
+      ellipse(location.x, location.y + f, f * 1.5, 0.5);
+      fill(255, 192, 203);
+      arc(location.x + f, location.y + f, f, f*2, 0, PI, CHORD);
+    }
+    if (currentFruitIndex == 1 || currentFruitIndex == 4 || currentFruitIndex == 7 || currentFruitIndex == 10) {
+      fill(0, 0, 0);
+      ellipse(location.x + f, location.y - f, f * 0.6, f * 0.6);
+      ellipse(location.x - f, location.y - f, f * 0.6, 1);
+      fill(255, 255, 255);
+      arc(location.x, location.y + f, f, f, 0, PI, CHORD);
+    }  
+    if (currentFruitIndex == 2 || currentFruitIndex == 5 || currentFruitIndex == 8) {
+      fill(0, 0, 0);
+      ellipse(location.x + f, location.y - f, f * 0.6, 1);
+      ellipse(location.x - f, location.y - f, f * 0.6, 1);
+      noFill();
+      arc(location.x, location.y + f, f , f , 0, PI, OPEN);
+    }  
   }
-  
 }

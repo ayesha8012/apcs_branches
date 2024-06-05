@@ -78,48 +78,48 @@ class Fruit{
     location.add(velocity);
   }
   
-  //void bottom() {
-  //  if (location.y + r >= 780) {
-  //    location.set(location.x, 780 - r);
-  //    velocity.set(0,0);
-  //    acceleration.set(0,0);
-  //  }
-  //}
-
-  void overlap(ArrayList<Fruit> f, Fruit a){
-    float current = location.y;
-    float check = 0;
-    float distance = 0;
-    float currRad = a.getRad();
-    float checkRad = 0;
-    float accDistance = 0;
-    for (int i = 0 ; i < f.size() - 1; i++) {
-      check = f.get(i).location.y;
-      checkRad = f.get(i).getRad();
-      distance = check + current;
-      accDistance = currRad + checkRad;
-      if (distance > accDistance) {
-        a.location.set(location.x, check - accDistance);
-        velocity.set(0,0);
-        acceleration.set(0,0);
-        overlapped = true;
-        currentMergeIndex = i;
-      }
-    }
-      if (overlapped == false) {
-      if (location.y + r >= 780) {
+  void bottom() {
+    if (location.y + r >= 780) {
       location.set(location.x, 780 - r);
       velocity.set(0,0);
       acceleration.set(0,0);
-      }
     }
   }
+
+  //void overlap(ArrayList<Fruit> f, Fruit a){
+  //  float current = location.y;
+  //  float check = 0;
+  //  float distance = 0;
+  //  float currRad = a.getRad();
+  //  float checkRad = 0;
+  //  float accDistance = 0;
+  //  for (int i = 0 ; i < f.size() - 1; i++) {
+  //    check = f.get(i).location.y;
+  //    checkRad = f.get(i).getRad();
+  //    distance = check + current;
+  //    accDistance = currRad + checkRad;
+  //    if (distance > accDistance) {
+  //      a.location.set(location.x, check - accDistance);
+  //      velocity.set(0,0);
+  //      acceleration.set(0,0);
+  //      overlapped = true;
+  //      currentMergeIndex = i;
+  //    }
+  //  }
+  //    if (overlapped == false) {
+  //    if (location.y + r >= 780) {
+  //    location.set(location.x, 780 - r);
+  //    velocity.set(0,0);
+  //    acceleration.set(0,0);
+  //    }
+  //  }
+  //}
   
-  void merge(ArrayList< Fruit> f, Fruit a) {
-    if (overlapped == true && f.get(currentMergeIndex).getRad() == a.getRad()){
-      delete();
-    }
-  }
+  //void merge(ArrayList< Fruit> f, Fruit a) {
+  //  if (overlapped == true && f.get(currentMergeIndex).getRad() == a.getRad()){
+  //    delete();
+  //  }
+  //}
   
   void roll() {
   }

@@ -41,16 +41,39 @@ void mainBackgroundDisplay() {
   drawContainer();
   for (Fruit f : fruits) {
     f.display();
-    //f.bottom();
-    f.overlap(fruits, f);
+    overlap(fruits);
+    f.bottom();
     f.move();
-    //f.overlap(fruits, f);
-   
+    f.bottom();
+    //f.endScreen(); 
   }
   fill(0);
   text(score, 30, 30);
 }
 
+void overlap(ArrayList<Fruit> fruits) {
+    if (fruits.size() < 2) {
+        return; 
+    }
+
+    Fruit currentFruit = fruits.get(fruits.size() - 1);
+    float currentY = currentFruit.location.y;
+    float currentRad = currentFruit.getRad();
+
+    for (int i = 0; i < fruits.size() - 1; i++) {
+        Fruit otherFruit = fruits.get(i);
+        float otherY = otherFruit.location.y;
+        float otherRad = otherFruit.getRad();
+
+        float distanceY = Math.abs(currentY - otherY);
+        float requiredDistance = currentRad + otherRad;
+
+        if (distanceY < requiredDistance) {
+            currentY = otherY - requiredDistance;
+            currentFruit.location.y = currentY;
+        }
+    }
+}
 
 void drawContainer(){
   stroke(0);

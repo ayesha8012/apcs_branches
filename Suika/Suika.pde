@@ -59,37 +59,25 @@ void overlap(ArrayList<Fruit> fruits) {
 
     Fruit currentFruit = fruits.get(fruits.size() - 1);
     float currentY = currentFruit.location.y;
+    float currentX = currentFruit.location.x; 
     float currentRad = currentFruit.getRad();
-    float currentX = currentFruit.location.x;
-    boolean close = false;
-    float otherY;
-    float otherX;
-    float otherRad;
-    float distance;
-    float requiredDistance;
 
     for (int i = 0; i < fruits.size() - 1; i++) {
         Fruit otherFruit = fruits.get(i);
-        otherY = otherFruit.location.y;
-        otherX = otherFruit.location.x;
-        otherRad = otherFruit.getRad();
+        float otherY = otherFruit.location.y;
+        float otherX = otherFruit.location.x; 
+        float otherRad = otherFruit.getRad();
 
-        distance = sqrt(sq(currentY - otherY) + sq(currentX - otherX));
-        requiredDistance = currentRad + otherRad;
+        float distanceY = Math.abs(currentY - otherY);
+        float distanceX = Math.abs(currentX - otherX);
+        float requiredDistance = currentRad + otherRad;
 
-        if (distance < requiredDistance) {
-          close = true;
-          break;
-        }
-    }
-    if (close == true) {
+        if (distanceY <= requiredDistance && distanceX <= requiredDistance) {
             currentY = otherY - requiredDistance;
             currentFruit.location.y = currentY;
-            location.set(location.x, currentY);
-            velocity.set(0, 0);
-            acceleration.set(0, 0);
         }
     }
+}
 
 void drawContainer(){
   stroke(0);

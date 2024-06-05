@@ -78,19 +78,19 @@ class Fruit{
     location.add(velocity);
   }
   
-  void bottom() {
-    if (location.y + r >= 780) {
-      location.set(location.x, 780 - r);
-      velocity.set(0,0);
-      acceleration.set(0,0);
-    }
-  }
+  //void bottom() {
+  //  if (location.y + r >= 780) {
+  //    location.set(location.x, 780 - r);
+  //    velocity.set(0,0);
+  //    acceleration.set(0,0);
+  //  }
+  //}
 
-  void overlap(ArrayList<Fruit> f){
-    float current = f.get(f.size() - 1).location.y;
+  void overlap(ArrayList<Fruit> f, Fruit a){
+    float current = location.y;
     float check = 0;
     float distance = 0;
-    float currRad = f.get(f.size() - 1).getRad();
+    float currRad = a.getRad();
     float checkRad = 0;
     float accDistance = 0;
     for (int i = 0 ; i < f.size() - 1; i++) {
@@ -99,16 +99,27 @@ class Fruit{
       distance = check + current;
       accDistance = currRad + checkRad;
       if (distance > accDistance) {
-        current = check + accDistance;
+        a.location.set(location.x, check - accDistance);
+        velocity.set(0,0);
+        acceleration.set(0,0);
         overlapped = true;
+        currentMergeIndex = i;
+      }
+    }
+      if (overlapped == false) {
+      if (location.y + r >= 780) {
+      location.set(location.x, 780 - r);
+      velocity.set(0,0);
+      acceleration.set(0,0);
       }
     }
   }
   
-  //void merge(ArrayList< Fruit> f) {
-  //  if (overlap(f) == true) {
-  //  }
-  //}
+  void merge(ArrayList< Fruit> f, Fruit a) {
+    if (overlapped == true && f.get(currentMergeIndex).getRad() == a.getRad()){
+      delete();
+    }
+  }
   
   void roll() {
   }
@@ -118,7 +129,7 @@ class Fruit{
   
   void delete() {
     fruits.remove(fruits.size() - 1);
-    
+    fruits.remove(currentMergeIndex);
     merged = false;
   }
   

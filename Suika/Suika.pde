@@ -41,9 +41,11 @@ void mainBackgroundDisplay() {
   drawContainer();
   for (Fruit f : fruits) {
     f.display();
-    f.bottom();
+    //f.bottom();
+    f.overlap(fruits, f);
     f.move();
-    f.bottom();
+    //f.overlap(fruits, f);
+   
   }
   fill(0);
   text(score, 30, 30);

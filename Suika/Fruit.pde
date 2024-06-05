@@ -86,28 +86,7 @@ class Fruit{
     }
   }
 
-  void overlap(ArrayList<Fruit> f){
-    float current = f.get(f.size() - 1).location.y;
-    float check = 0;
-    float distance = 0;
-    float currRad = f.get(f.size() - 1).getRad();
-    float checkRad = 0;
-    float accDistance = 0;
-    for (int i = 0 ; i < f.size() - 1; i++) {
-      check = f.get(i).location.y;
-      checkRad = f.get(i).getRad();
-      distance = check + current;
-      accDistance = currRad + checkRad;
-      if (distance > accDistance) {
-        current = check + accDistance;
-        overlapped = true;
- //go through the array 
-    //find the distance between the other fruits and the fruit you just dropped.
-    //if the distance between the two centers is too close, make the y value that distance above
-
-      }
-    }
-  }
+ 
   
   //void merge(ArrayList< Fruit> f) {
   //  if (overlap(f) == true) {

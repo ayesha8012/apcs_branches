@@ -6,6 +6,7 @@ String[] types = {"cherry", "strawberry", "grape", "tangerine",
                 "melon", "watermelon"};
 int currentFruitIndex = 0; 
 int currentMergeIndex = 0;
+int listindex = -1; 
 PVector location = new PVector(mouseX, 250);
 PVector velocity = new PVector(0, 2);
 PVector acceleration = new PVector(0, 0);
@@ -42,7 +43,8 @@ void draw() {
 void mouseClicked() {
   if (mouseButton == LEFT) {
   Fruit fruit = nextFruit(currentFruit);
-  currentFruit = fruit;  
+  currentFruit = fruit;
+  listindex++; 
   whichFruit = currentFruit.getType();
   if (mouseX >= 100 + fruit.getRad() && mouseX <= 700 - fruit.getRad()) {
     fruit.setX(mouseX); 
@@ -72,6 +74,10 @@ void mainBackgroundDisplay() {
         currentY = f.location.y;
         currentRad = f.getRad();
        }
+      if (listindex > 2){
+          endScreen(fruits.get(listindex - 1));
+          println((fruits.get(listindex - 1)).location.y); 
+        }
        if (endGame == true) {
           r = 0;
           g = 0;

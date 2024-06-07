@@ -162,13 +162,13 @@ void overlap(ArrayList<Fruit> fruits) {
   
   void merge(Fruit f) {
     if (overlapped == true) {
-      if (closest.getType().equals(f.getType())) {
+      if (closest.getType() == f.getType()) {
         merged = true;
         overlapped = false;
         frX = f.location.x;
         frY = f.location.y;
-        //deleteDisplay(f);
-        //deleteDisplay(closest);
+        deleteDisplay(f);
+        deleteDisplay(closest);
         delete();
         currentMergeIndex = currentFruitIndex + 1;
         if (currentMergeIndex > 0 && currentMergeIndex <= 10) {
@@ -334,6 +334,11 @@ void overlap(ArrayList<Fruit> fruits) {
     }  
   }
   
-  void deleteDisplay(Fruit f) {
+  void deleteDisplay(Fruit a) {
+    noFill();
+    noStroke();
+    c = color(255, 229, 180);
+    fill(c);
+    ellipse(a.location.x, a.location.y, (2*r)+4.4, (2*r)+4.4);
   }
 }

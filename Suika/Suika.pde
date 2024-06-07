@@ -21,6 +21,9 @@ int textX = 0;
 int textY = 0;
 Fruit w = watermelon();
 boolean reachedTop = false;
+String whichFruit = "Strawberry";
+float currentY = 0;
+float currentRad = 0;
 
 void setup() {
   size(800, 800);
@@ -40,6 +43,7 @@ void mouseClicked() {
   if (mouseButton == LEFT) {
   Fruit fruit = nextFruit(currentFruit);
   currentFruit = fruit;  
+  whichFruit = currentFruit.getType();
   if (mouseX >= 100 + fruit.getRad() && mouseX <= 700 - fruit.getRad()) {
     fruit.setX(mouseX); 
     fruits.add(fruit);
@@ -50,7 +54,6 @@ void mouseClicked() {
 
 void mainBackgroundDisplay() {
   if (startGame == true) {
-      //color c = color(255, 229, 180);
       r = 255;
       g = 229;
       b = 180;
@@ -58,12 +61,16 @@ void mainBackgroundDisplay() {
       text = "";
       drawContainer();
       text(score, 30, 40);
+      text(whichFruit, 680, 40);
+      w.deleteDisplay(w);
       for (Fruit f : fruits) {
         f.display();
         f.move();
         f.overlap(fruits);
         f.bottom();
         //f.merge(f);
+        currentY = f.location.y;
+        currentRad = f.getRad();
        }
        if (endGame == true) {
           r = 0;
@@ -85,8 +92,9 @@ void beginningScreen() {
   b = 121;
   textX = 100;
   textY = 500; 
-  //w.location.set(375, 300);
-  //w.display();
+  w.location.set(400, 300);
+  w.display();
+  currentFruitIndex = 10;
   fill(255, 160, 16);
   text = "Suika Game";
   textSize(120);
@@ -96,9 +104,12 @@ void beginningScreen() {
 }
 
 void endScreen() {
-    float loc = currentFruit.location.y;
-    float radius = currentFruit.getRad();
-    if (loc - radius < 100) {
+  //float loc = 0;
+  ////if (fruits.size() > 0) {
+  ////  loc = fruits.get(fruits.size() - 1).location.y;
+  ////}
+  //  float radius = currentFruit.getRad();
+    if (currentY - currentRad < 100) {
       endGame = true;
     }
 }
@@ -113,58 +124,58 @@ void drawContainer(){
 
 Fruit cherry(){
   currentFruitIndex = 0; 
-  return new Fruit(16, 4, color(248, 30, 30), fruitX, fruitY, 0, 2, "cherry"); 
+  return new Fruit(16, 4, color(248, 30, 30), fruitX, fruitY, 0, 2, "Cherry"); 
 }
 
 Fruit strawberry(){
   currentFruitIndex = 1; 
-  return new Fruit(22, 5.5, color(241, 98, 64), fruitX, fruitY, 0, 2, "strawberry"); 
+  return new Fruit(22, 5.5, color(241, 98, 64), fruitX, fruitY, 0, 2, "Strawberry"); 
 }
 
 Fruit grape(){
   currentFruitIndex = 2; 
-  return new Fruit(28, 7, color(198, 55, 238), fruitX, fruitY, 0, 2, "grape"); 
+  return new Fruit(28, 7, color(198, 55, 238), fruitX, fruitY, 0, 2, "Grape"); 
 }
 
 Fruit tangerine(){
   currentFruitIndex = 3; 
-  return new Fruit(34, 8.5, color(234, 172, 41), fruitX, fruitY, 0, 2, "tangerine"); 
+  return new Fruit(34, 8.5, color(234, 172, 41), fruitX, fruitY, 0, 2, "Tangerine"); 
 }
 
 Fruit orange(){
   currentFruitIndex = 4;
-  return new Fruit(40, 10, color(230, 113, 11), fruitX, fruitY, 0, 2, "orange"); 
+  return new Fruit(40, 10, color(230, 113, 11), fruitX, fruitY, 0, 2, "Orange"); 
   
 }
 
 Fruit apple(){
   currentFruitIndex = 5; 
-  return new Fruit(46, 11.5, color(250, 10, 10), fruitX, fruitY, 0, 2, "apple"); 
+  return new Fruit(46, 11.5, color(250, 10, 10), fruitX, fruitY, 0, 2, "Apple"); 
 }
 
 Fruit pear(){
   currentFruitIndex = 6; 
-  return new Fruit(52, 13, color(247, 183, 7), fruitX, fruitY, 0, 2, "pear"); 
+  return new Fruit(52, 13, color(247, 183, 7), fruitX, fruitY, 0, 2, "Pear"); 
 }
 
 Fruit peach(){
   currentFruitIndex = 7; 
-  return new Fruit(58, 14.5, color(228, 145, 215), fruitX, fruitY, 0, 2, "peach"); 
+  return new Fruit(58, 14.5, color(228, 145, 215), fruitX, fruitY, 0, 2, "Peach"); 
 }
 
 Fruit pineapple(){
   currentFruitIndex = 8;
-  return new Fruit(64, 16, color(247, 220, 84), fruitX, fruitY, 0, 2, "pineapple"); 
+  return new Fruit(64, 16, color(247, 220, 84), fruitX, fruitY, 0, 2, "Pineapple"); 
 }
 
 Fruit melon(){
   currentFruitIndex = 9; 
-  return new Fruit(70, 17.5, color(158, 241, 118), fruitX, fruitY, 0, 2, "melon"); 
+  return new Fruit(70, 17.5, color(158, 241, 118), fruitX, fruitY, 0, 2, "Melon"); 
 }
 
 Fruit watermelon(){
   currentFruitIndex = 10; 
-  return new Fruit(76, 19, color(38, 207, 32), fruitX, fruitY, 0, 2, "watermelon");
+  return new Fruit(76, 19, color(38, 207, 32), fruitX, fruitY, 0, 2, "Watermelon");
 }
 
 Fruit nextFruit(Fruit f){

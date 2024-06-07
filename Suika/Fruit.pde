@@ -10,6 +10,11 @@ class Fruit{
   int y; 
   boolean overlapped = false;
   boolean merged = false;
+  boolean close = false;
+  Fruit closest;
+  Fruit fr;
+  float frX;
+  float frY;
   
   
  Fruit(int rad, float face, int col, int xPos, int yPos, float xVel, float yVel, String type) {  
@@ -86,53 +91,218 @@ class Fruit{
     }
   }
 
-  //void overlap(ArrayList<Fruit> f, Fruit a){
-  //  float current = location.y;
-  //  float check = 0;
-  //  float distance = 0;
-  //  float currRad = a.getRad();
-  //  float checkRad = 0;
-  //  float accDistance = 0;
-  //  for (int i = 0 ; i < f.size() - 1; i++) {
-  //    check = f.get(i).location.y;
-  //    checkRad = f.get(i).getRad();
-  //    distance = check + current;
-  //    accDistance = currRad + checkRad;
-  //    if (distance > accDistance) {
-  //      a.location.set(location.x, check - accDistance);
-  //      velocity.set(0,0);
-  //      acceleration.set(0,0);
-  //      overlapped = true;
-  //      currentMergeIndex = i;
-  //    }
+  //void closestFruit(ArrayList<Fruit> fruits, Fruit f) {
+  //  if (fruits.size() < 2) {
+  //    return;
   //  }
-  //    if (overlapped == false) {
-  //    if (location.y + r >= 780) {
-  //    location.set(location.x, 780 - r);
-  //    velocity.set(0,0);
-  //    acceleration.set(0,0);
-  //    }
+  //  float currentX = f.location.x;
+  //  float currentY = f.location.y;
+  //  float currentRad = f.getRad();
+  //  float otherX = 0;
+  //  float otherY = 0;
+  //  float otherRad = 0;
+  //  float distanceX = 0;
+  //  float distanceY = 0;
+  //  float requiredDistance = 0;
+  //  float hypotenuse = 0;
+  //  float closestDistance = 1000000;
+  //  for (int i = 0; i < fruits.size(); i++) {
+  //      Fruit otherFruit = fruits.get(i);
+  //      otherY = otherFruit.location.y;
+  //      otherX = otherFruit.location.x; 
+  //      otherRad = otherFruit.getRad();
+  //      distanceY = Math.abs(currentY - otherY);
+  //      distanceX = Math.abs(currentX - otherX);
+  //      hypotenuse = sqrt(sq(distanceX) + sq(distanceY));
+  //      requiredDistance = currentRad + otherRad;
+  //      if (hypotenuse < closestDistance) {
+  //        closestDistance = hypotenuse;
+  //        closest = otherFruit;
+  //      }
   //  }
+  //  //if (closestDistance != 1000000) {
+  //    close = true;
+  //  //}
   //}
+
+void overlap(ArrayList<Fruit> fruits) {
+    if (fruits.size() < 2) {
+        return; 
+    }
+    Fruit currentFruit = fruits.get(fruits.size() - 1);
+    float currentY = currentFruit.location.y;
+    float currentX = currentFruit.location.x; 
+    float currentRad = currentFruit.getRad();
+    float otherY = 0;
+    float otherX = 0;
+    float otherRad = 0;
+    float distanceY = 0;
+    float distanceX = 0;
+    float requiredDistance = 0;
+    for (int i = 0; i < fruits.size() - 1; i++) {
+        Fruit otherFruit = fruits.get(i);
+        otherY = otherFruit.location.y;
+        otherX = otherFruit.location.x; 
+        otherRad = otherFruit.getRad();
+        distanceY = Math.abs(currentY - otherY);
+        distanceX = Math.abs(currentX - otherX);
+        requiredDistance = currentRad + otherRad;
+        if (distanceY <= requiredDistance && distanceX <= requiredDistance) {
+            currentY = otherY - requiredDistance;
+            currentFruit.location.set(currentX, currentY);
+            velocity.set(0, 0);
+            acceleration.set(0,0);
+            overlapped = true;
+            closest = otherFruit;
+        }
+    }
+}
+
+
   
-  //void merge(ArrayList< Fruit> f, Fruit a) {
-  //  if (overlapped == true && f.get(currentMergeIndex).getRad() == a.getRad()){
-  //    delete();
-  //  }
-  //}
+  void merge(Fruit f) {
+    if (overlapped == true) {
+      if (closest.getType().equals(f.getType())) {
+        merged = true;
+        overlapped = false;
+        frX = f.location.x;
+        frY = f.location.y;
+        //deleteDisplay(f);
+        //deleteDisplay(closest);
+        delete();
+        currentMergeIndex = currentFruitIndex + 1;
+        if (currentMergeIndex > 0 && currentMergeIndex <= 10) {
+          returnFruit(currentMergeIndex);
+        }
+          Fruit m = fr;
+          fruits.add(m);
+          //displayNewFruit();
+          }
+        }
+        else {
+          return;
+    }
+  }
+  
+  void returnFruit(int c) {
+     if (c == 1) {
+      fr = strawberry();
+    }
+    else if (c == 2) {
+      fr = grape();
+    }
+    else if (c == 3) {
+      fr = tangerine();
+    }
+    else if (c == 4) {
+      fr = orange();
+    }
+    else if (c == 5) {
+      fr = apple();
+    }
+    else if (c == 6) {
+      fr = pear();
+    }
+    else if (c == 7) {
+      fr = peach();
+    }
+    else if (c == 8) {
+      fr = pineapple();
+    }
+    else if (c == 9) {
+      fr = melon();
+    }
+    else if (c == 10) {
+     fr = watermelon();
+    }
+  }
+  
+  
+  void displayNewFruit() {
+    Fruit f = cherry();
+    if (currentMergeIndex == 1) {
+      f = strawberry();
+      f.location.set(frX, frY);
+      strawberry().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 2) {
+      f = grape();
+      f.location.set(frX, frY);
+      grape().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 3) {
+      f = tangerine();
+      f.location.set(frX, frY);
+      tangerine().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 4) {
+      f = orange();
+      f.location.set(frX, frY);
+      orange().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 5) {
+      f = apple();
+      f.location.set(frX, frY);
+      apple().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 6) {
+      f = pear();
+      f.location.set(frX, frY);
+      pear().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 7) {
+      f = peach();
+      f.location.set(frX, frY);
+      peach().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 8) {
+      f = pineapple();
+      f.location.set(frX, frY);
+      pineapple().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 9) {
+      f = melon();
+      f.location.set(frX, frY);
+      melon().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 10) {
+      f = watermelon();
+      f.location.set(frX, frY);
+      watermelon().display();
+      overlap(fruits);
+    }
+    else if (currentMergeIndex == 11) {
+      currentMergeIndex = 0;
+    }
+  }
   
   void roll() {
+    if (overlapped == true) {
+      
+    }
   }
   
-  void bounce() {
-  }
+  //void bounce() {
+    
+  //}
   
   void delete() {
+    if (merged == true) {
     fruits.remove(fruits.size() - 1);
     fruits.remove(currentMergeIndex);
     merged = false;
+    }
   }
-  
+
 
   void display() {
     stroke(1);
@@ -162,5 +332,8 @@ class Fruit{
       noFill();
       arc(location.x, location.y + f, f , f , 0, PI, OPEN);
     }  
+  }
+  
+  void deleteDisplay(Fruit f) {
   }
 }

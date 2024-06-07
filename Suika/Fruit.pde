@@ -167,16 +167,16 @@ void overlap(ArrayList<Fruit> fruits) {
         overlapped = false;
         frX = f.location.x;
         frY = f.location.y;
+        delete();
         deleteDisplay(f);
         deleteDisplay(closest);
-        delete();
         currentMergeIndex = currentFruitIndex + 1;
         if (currentMergeIndex > 0 && currentMergeIndex <= 10) {
           returnFruit(currentMergeIndex);
         }
           Fruit m = fr;
           fruits.add(m);
-          //displayNewFruit();
+          displayNewFruit();
           }
         }
         else {
@@ -341,4 +341,5 @@ void overlap(ArrayList<Fruit> fruits) {
     fill(c);
     ellipse(a.location.x, a.location.y, (2*r)+4.4, (2*r)+4.4);
   }
+  
 }

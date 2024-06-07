@@ -5,6 +5,7 @@ String[] types = {"cherry", "strawberry", "grape", "tangerine",
                   "orange", "apple", "pear", "peach", "pineapple", 
                 "melon", "watermelon"};
 int currentFruitIndex = 0; 
+int listIndex = -1;
 int currentMergeIndex = 0;
 PVector location = new PVector(mouseX, 250);
 PVector velocity = new PVector(0, 2);
@@ -20,10 +21,15 @@ String text = "";
 int textX = 0;
 int textY = 0;
 Fruit w = watermelon();
+int wIndex = 10;
+Fruit a = apple();
+int aIndex = 5;
+Fruit o = orange();
+int oIndex = 4;
+Fruit t = tangerine();
+int tIndex = 3;
 boolean reachedTop = false;
-String whichFruit = "Strawberry";
-float currentY = 0;
-float currentRad = 0;
+String whichFruit = "Cherry";
 
 void setup() {
   size(800, 800);
@@ -36,14 +42,16 @@ void draw() {
   text(text, textX, textY);
   beginningScreen();
   mainBackgroundDisplay();
-  //endScreen();
+  //endScreen(currentFruit);
 }
 
 void mouseClicked() {
   if (mouseButton == LEFT) {
-  Fruit fruit = nextFruit(currentFruit);
-  currentFruit = fruit;  
-  whichFruit = currentFruit.getType();
+    Fruit fruit = nextFruit(currentFruit);
+    text(whichFruit, 680, 40);
+    currentFruit = fruit;  
+    listIndex++;
+    whichFruit = currentFruit.getType();
   if (mouseX >= 100 + fruit.getRad() && mouseX <= 700 - fruit.getRad()) {
     fruit.setX(mouseX); 
     fruits.add(fruit);
@@ -63,26 +71,31 @@ void mainBackgroundDisplay() {
       text(score, 30, 40);
       text(whichFruit, 680, 40);
       w.deleteDisplay(w);
+      a.deleteDisplay(a);
+      o.deleteDisplay(o);
+      t.deleteDisplay(t);
       for (Fruit f : fruits) {
         f.display();
         f.move();
         f.overlap(fruits);
         f.bottom();
         //f.merge(f);
-        currentY = f.location.y;
-        currentRad = f.getRad();
+       }
+       if (listIndex > 2) {
+         endScreen(fruits.get(listIndex - 1));
+         println((fruits.get(listIndex - 1)).location.y);
        }
        if (endGame == true) {
-          r = 0;
-          g = 0;
-          b = 0;
-          textX = 100;
-          textY = 400;
+          //r = 0;
+          //g = 0;
+          //b = 0;
+          textX = 110;
+          textY = 500;
           textSize(125);
           fill(255);
           text = "Game Over";
-        }
-      }
+        } 
+    }
 }
 
 
@@ -94,6 +107,12 @@ void beginningScreen() {
   textY = 500; 
   w.location.set(400, 300);
   w.display();
+  a.location.set(300, 350);
+  a.display();
+  o.location.set(500, 350);
+  o.display();
+  t.location.set(400, 200);
+  t.display();
   currentFruitIndex = 10;
   fill(255, 160, 16);
   text = "Suika Game";
@@ -103,13 +122,8 @@ void beginningScreen() {
     }
 }
 
-void endScreen() {
-  //float loc = 0;
-  ////if (fruits.size() > 0) {
-  ////  loc = fruits.get(fruits.size() - 1).location.y;
-  ////}
-  //  float radius = currentFruit.getRad();
-    if (currentY - currentRad < 100) {
+void endScreen(Fruit f) {
+    if (f.location.y - f.getRad() <= 100) {
       endGame = true;
     }
 }
@@ -139,12 +153,12 @@ Fruit grape(){
 
 Fruit tangerine(){
   currentFruitIndex = 3; 
-  return new Fruit(34, 8.5, color(234, 172, 41), fruitX, fruitY, 0, 2, "Tangerine"); 
+  return new Fruit(34, 8.5, color(255, 203, 80), fruitX, fruitY, 0, 2, "Tangerine"); 
 }
 
 Fruit orange(){
   currentFruitIndex = 4;
-  return new Fruit(40, 10, color(230, 113, 11), fruitX, fruitY, 0, 2, "Orange"); 
+  return new Fruit(40, 10, color(252, 153, 24), fruitX, fruitY, 0, 2, "Orange"); 
   
 }
 
@@ -182,15 +196,21 @@ Fruit nextFruit(Fruit f){
   currentFruitIndex = (int)(random(types.length - 6));
   if (currentFruitIndex == 0){
     f =  cherry(); 
+    whichFruit = "Cherry";
   } else if (currentFruitIndex == 1){
     f =  strawberry(); 
+    whichFruit = "Strawberry";
   }  else if (currentFruitIndex == 2){
     f =  grape(); 
+    whichFruit = "Grape";
   }  else if (currentFruitIndex == 3){
     f =  tangerine(); 
+    whichFruit = "Tangerine";
   }  else if (currentFruitIndex == 4){
     f = orange(); 
-  } return f; 
+    whichFruit = "Orange";
+  } 
+  return f; 
 }
 
 void updateScore(){

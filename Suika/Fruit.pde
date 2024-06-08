@@ -15,9 +15,10 @@ class Fruit{
   Fruit fr;
   float frX;
   float frY;
+  int i;
   
   
- Fruit(int rad, float face, int col, int xPos, int yPos, float xVel, float yVel, String type) {  
+ Fruit(int rad, float face, int col, int xPos, int yPos, float xVel, float yVel, String type, int index) {  
     location = new PVector(x, y); 
     velocity = new PVector(0, 2);
     c = col; 
@@ -26,7 +27,17 @@ class Fruit{
     t = type; 
     x = xPos; 
     y = yPos; 
+    i = index;
   }
+  
+  public void setIndex(int index) {
+    i = index;
+  }
+  
+  public int getIndex() {
+    return i;
+  }
+  
   
   public void setRad(int rad){
     r = rad; 
@@ -149,6 +160,190 @@ void overlap(ArrayList<Fruit> fruits) {
         requiredDistance = currentRad + otherRad;
         if (distanceY <= requiredDistance && distanceX <= requiredDistance) {
             currentY = otherY - requiredDistance;
+            if (currentX < otherX) {
+              if (currentFruit.getIndex() == otherFruit.getIndex()) {
+                if (currentX < otherX - (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 13);
+                }
+                if (currentX < otherX - (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 12.5);
+                }
+                if (currentX < otherX - (otherFruit.getRad()/2)) {
+                  currentY += (otherFruit.getRad() / 12);
+                }
+                 if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 11.5);
+                }
+                if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 8))) {
+                  currentY += (otherFruit.getRad() / 11);
+                }
+                if (currentX < otherX - (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 10.5);
+                }
+                if (currentX < otherX - (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 10);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 5))) {
+                  currentY += (otherFruit.getRad() / 9.5);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 9);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
+                  currentY += (otherFruit.getRad() / 8.5);
+                }
+              }
+              if (currentFruit.getIndex() > otherFruit.getIndex()) {
+                if (currentX < otherX - (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 17);
+                }
+                if (currentX < otherX - (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 16);
+                }
+                if (currentX < otherX - (otherFruit.getRad()/2)) {
+                  currentY += (otherFruit.getRad() / 15);
+                }
+                 if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 14);
+                }
+                if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 8))) {
+                  currentY += (otherFruit.getRad() / 13);
+                }
+                if (currentX < otherX - (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 12);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 5))) {
+                  currentY += (otherFruit.getRad() / 11);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 10);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
+                  currentY += (otherFruit.getRad() / 9);
+                }
+              }
+              if (currentFruit.getIndex() < otherFruit.getIndex()) {
+                if (currentX < otherX - (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 15);
+                }
+                if (currentX < otherX - (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 14);
+                }
+                if (currentX < otherX - (otherFruit.getRad()/2)) {
+                  currentY += (otherFruit.getRad() / 13);
+                }
+                 if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 12);
+                }
+                if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 8))) {
+                  currentY += (otherFruit.getRad() / 11);
+                }
+                if (currentX < otherX - (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 10);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 5))) {
+                  currentY += (otherFruit.getRad() / 9);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 8);
+                }
+                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
+                  currentY += (otherFruit.getRad() / 7);
+                }
+              }
+            }
+            if (currentX > otherX) {
+              if (currentFruit.getIndex() == otherFruit.getIndex()) {
+                if (currentX > otherX + (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 13);
+                }
+                if (currentX > otherX + (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 12.5);
+                }
+                if (currentX > otherX + (otherFruit.getRad()/2)) {
+                  currentY += (otherFruit.getRad() / 12);
+                }
+                if (currentX > otherX + (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 11.5);
+                }
+                if (currentX > otherX + (otherFruit.getRad() - (otherFruit.getRad() / 8))) {
+                  currentY += (otherFruit.getRad() / 11);
+                }
+                if (currentX == otherX + (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 10.5);
+                }
+                if (currentX > otherX + (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 10);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/5)) {
+                  currentY += (otherFruit.getRad() / 9.5);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 9);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 8.5);
+                }
+              }
+              if (currentFruit.getIndex() > otherFruit.getIndex()) {
+                if (currentX > otherX + (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 17);
+                }
+                if (currentX > otherX + (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 16);
+                }
+                if (currentX > otherX + (otherFruit.getRad()/2)) {
+                  currentY += (otherFruit.getRad() / 15);
+                }
+                if (currentX > otherX + (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 14);
+                }
+                if (currentX > otherX + (otherFruit.getRad() - (otherFruit.getRad() / 8))) {
+                  currentY += (otherFruit.getRad() / 13);
+                }
+                if (currentX > otherX + (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 12);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/5)) {
+                  currentY += (otherFruit.getRad() / 11);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 10);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 9);
+                }
+              }
+              if (currentFruit.getIndex() < otherFruit.getIndex()) {
+                if (currentX > otherX + (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 15);
+                }
+                if (currentX > otherX + (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 14);
+                }
+                if (currentX > otherX + (otherFruit.getRad()/2)) {
+                  currentY += (otherFruit.getRad() / 13);
+                }
+                if (currentX > otherX + (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+                  currentY += (otherFruit.getRad() / 12);
+                }
+                if (currentX > otherX + (otherFruit.getRad() - (otherFruit.getRad() / 8))) {
+                  currentY += (otherFruit.getRad() / 11);
+                }
+                if (currentX > otherX + (otherFruit.getRad())) {
+                  currentY += (otherFruit.getRad() / 10);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/5)) {
+                  currentY += (otherFruit.getRad() / 9);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
+                  currentY += (otherFruit.getRad() / 8);
+                }
+                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
+                  currentY += (otherFruit.getRad() / 7);
+                }
+              }
+            }
             currentFruit.location.set(currentX, currentY);
             velocity.set(0, 0);
             acceleration.set(0,0);
@@ -285,14 +480,10 @@ void overlap(ArrayList<Fruit> fruits) {
     }
   }
   
-  void roll() {
-    if (overlapped == true) {
-      
-    }
-  }
-  
-  //void bounce() {
-    
+  //void roll(Arraylist<Fruits> Fruit, Fruit f) {
+  //  if (overlapped == true) {
+  //    if (currentY > otherY
+  //  }
   //}
   
   void delete() {

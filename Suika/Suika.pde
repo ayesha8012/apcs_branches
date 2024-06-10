@@ -240,26 +240,26 @@ Fruit watermelon(){
   return new Fruit(76, 19, color(38, 207, 32), fruitX, fruitY, 0, 2, "Watermelon", 10);
 }
 
-Fruit nextFruit(Fruit f){
-  currentFruitIndex = (int)(random(types.length - 6));
-  if (currentFruitIndex == 0){
-    f =  cherry(); 
-    whichFruit = "Cherry";
-  } else if (currentFruitIndex == 1){
-    f =  strawberry(); 
-    whichFruit = "Strawberry";
-  }  else if (currentFruitIndex == 2){
-    f =  grape(); 
-    whichFruit = "Grape";
-  }  else if (currentFruitIndex == 3){
-    f =  tangerine(); 
-    whichFruit = "Tangerine";
-  }  else if (currentFruitIndex == 4){
-    f = orange(); 
-    whichFruit = "Orange";
-  } 
-  return f; 
-}
+//Fruit nextFruit(Fruit f){
+//  currentFruitIndex = (int)(random(types.length - 6));
+//  if (currentFruitIndex == 0){
+//    f =  cherry(); 
+//    whichFruit = "Cherry";
+//  } else if (currentFruitIndex == 1){
+//    f =  strawberry(); 
+//    whichFruit = "Strawberry";
+//  }  else if (currentFruitIndex == 2){
+//    f =  grape(); 
+//    whichFruit = "Grape";
+//  }  else if (currentFruitIndex == 3){
+//    f =  tangerine(); 
+//    whichFruit = "Tangerine";
+//  }  else if (currentFruitIndex == 4){
+//    f = orange(); 
+//    whichFruit = "Orange";
+//  } 
+//  return f; 
+//}
 
 void updateScore(){
   if (currentFruitIndex == 0){

@@ -104,40 +104,6 @@ class Fruit{
     }
   }
 
-  //void closestFruit(ArrayList<Fruit> fruits, Fruit f) {
-  //  if (fruits.size() < 2) {
-  //    return;
-  //  }
-  //  float currentX = f.location.x;
-  //  float currentY = f.location.y;
-  //  float currentRad = f.getRad();
-  //  float otherX = 0;
-  //  float otherY = 0;
-  //  float otherRad = 0;
-  //  float distanceX = 0;
-  //  float distanceY = 0;
-  //  float requiredDistance = 0;
-  //  float hypotenuse = 0;
-  //  float closestDistance = 1000000;
-  //  for (int i = 0; i < fruits.size(); i++) {
-  //      Fruit otherFruit = fruits.get(i);
-  //      otherY = otherFruit.location.y;
-  //      otherX = otherFruit.location.x; 
-  //      otherRad = otherFruit.getRad();
-  //      distanceY = Math.abs(currentY - otherY);
-  //      distanceX = Math.abs(currentX - otherX);
-  //      hypotenuse = sqrt(sq(distanceX) + sq(distanceY));
-  //      requiredDistance = currentRad + otherRad;
-  //      if (hypotenuse < closestDistance) {
-  //        closestDistance = hypotenuse;
-  //        closest = otherFruit;
-  //      }
-  //  }
-  //  //if (closestDistance != 1000000) {
-  //    close = true;
-  //  //}
-  //}
-
 
 void overlap(ArrayList<Fruit> fruits) {
     if (fruits.size() < 2) {
@@ -145,7 +111,7 @@ void overlap(ArrayList<Fruit> fruits) {
     }
     Fruit currentFruit = fruits.get(fruits.size() - 1);
     float currentY = currentFruit.location.y;
-    oldY = currentY; 
+    oldY = currentY - 50; 
     float currentX = currentFruit.location.x; 
     oldX = currentX; 
     float currentRad = currentFruit.getRad();
@@ -164,6 +130,7 @@ void overlap(ArrayList<Fruit> fruits) {
         distanceX = Math.abs(currentX - otherX);
         requiredDistance = currentRad + otherRad;
         if (distanceY <= requiredDistance && distanceX <= requiredDistance) {
+          currentMergeIndex = i;
             currentY = otherY - requiredDistance;
             if (currentX < otherX) {
               if (currentFruit.getIndex() == otherFruit.getIndex()) {
@@ -194,9 +161,9 @@ void overlap(ArrayList<Fruit> fruits) {
                 if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
                   currentY += (otherFruit.getRad() / 9);
                 }
-                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
-                  currentY += (otherFruit.getRad() / 8.5);
-                }
+                //if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
+                //  currentY += (otherFruit.getRad() / 8.5);
+                //}
               }
               if (currentFruit.getIndex() > otherFruit.getIndex()) {
                 if (currentX < otherX - (otherFruit.getRad()/4)) {
@@ -223,9 +190,9 @@ void overlap(ArrayList<Fruit> fruits) {
                 if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
                   currentY += (otherFruit.getRad() / 10);
                 }
-                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
-                  currentY += (otherFruit.getRad() / 9);
-                }
+                //if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
+                //  currentY += (otherFruit.getRad() / 9);
+                //}
               }
               if (currentFruit.getIndex() < otherFruit.getIndex()) {
                 if (currentX < otherX - (otherFruit.getRad()/4)) {
@@ -252,9 +219,9 @@ void overlap(ArrayList<Fruit> fruits) {
                 if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
                   currentY += (otherFruit.getRad() / 8);
                 }
-                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
-                  currentY += (otherFruit.getRad() / 7);
-                }
+                //if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
+                //  currentY += (otherFruit.getRad() / 7);
+                //}
               }
             }
             if (currentX > otherX) {
@@ -286,9 +253,9 @@ void overlap(ArrayList<Fruit> fruits) {
                 if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
                   currentY += (otherFruit.getRad() / 9);
                 }
-                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
-                  currentY += (otherFruit.getRad() / 8.5);
-                }
+                //if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
+                //  currentY += (otherFruit.getRad() / 8.5);
+                //}
               }
               if (currentFruit.getIndex() > otherFruit.getIndex()) {
                 if (currentX > otherX + (otherFruit.getRad()/4)) {
@@ -315,9 +282,9 @@ void overlap(ArrayList<Fruit> fruits) {
                 if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
                   currentY += (otherFruit.getRad() / 10);
                 }
-                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
-                  currentY += (otherFruit.getRad() / 9);
-                }
+                //if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
+                //  currentY += (otherFruit.getRad() / 9);
+                //}
               }
               if (currentFruit.getIndex() < otherFruit.getIndex()) {
                 if (currentX > otherX + (otherFruit.getRad()/4)) {
@@ -344,9 +311,9 @@ void overlap(ArrayList<Fruit> fruits) {
                 if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
                   currentY += (otherFruit.getRad() / 8);
                 }
-                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
-                  currentY += (otherFruit.getRad() / 7);
-                }
+                //if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/3)) {
+                //  currentY += (otherFruit.getRad() / 7);
+                //}
               }
             }
             currentFruit.location.set(currentX, currentY);
@@ -361,12 +328,6 @@ void overlap(ArrayList<Fruit> fruits) {
     }
 }
   
-
-
-
-
-
-  
   void merge(Fruit f) {
     if (overlapped && merged) {
         overlapped = false;
@@ -375,8 +336,12 @@ void overlap(ArrayList<Fruit> fruits) {
         //listIndex--; 
         //listIndex--; 
         //dzeleteDisplay(f);
-        //deleteDisplay(closest);
-        displayNewFruit(f); 
+        //deleteDisplay(closest)
+        //delete(fruits);
+        displayNewFruit(f);
+        velocity.set(0, 2);
+        acceleration.set(0, 0);
+        overlap(fruits);
     }
   }
  
@@ -412,10 +377,18 @@ void overlap(ArrayList<Fruit> fruits) {
   }
   
   void displayNewFruit(Fruit f){
+    if (fruits.size() >= 2) {
     f = nextFruit(f.getType()); 
+    fruits.add(f);
     f.location.x = oldX; 
     f.location.y = oldY; 
     f.display();
+    Fruit a = fruits.get(fruits.size() - 2);
+    fruits.remove(a);
+    listIndex--; 
+    fruits.remove(currentMergeIndex); 
+    merged = false;
+    }
   }
   
   String nextType(String t){
@@ -456,6 +429,7 @@ void overlap(ArrayList<Fruit> fruits) {
     fruits.remove(currentMergeIndex); 
     String nt = nextType(f.getType()); 
     fruits.add(nextFruit(nt)); 
+    
     merged = false;
   }
 

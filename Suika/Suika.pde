@@ -1,9 +1,9 @@
 ArrayList<Fruit> fruits;
-Fruit currentFruit = new Fruit(2, 2, color(248, 30, 30), 500, 250, 0, 2, "cherry", 0); 
+Fruit currentFruit = new Fruit(2, 2, color(248, 30, 30), 500, 250, 0, 2, "Cherry", 0); 
 int score = 0;
-String[] types = {"cherry", "strawberry", "grape", "tangerine", 
-                  "orange", "apple", "pear", "peach", "pineapple", 
-                "melon", "watermelon"};
+String[] types = {"Cherry", "Strawberry", "Grape", "Tangerine", 
+                  "Orange", "Apple", "Pear", "Peach", "Pineapple", 
+                "Melon", "Watermelon"};
 int currentFruitIndex = 0; 
 int listIndex = -1;
 int currentMergeIndex = 0; 
@@ -42,15 +42,16 @@ void draw() {
   text(text, textX, textY);
   beginningScreen();
   mainBackgroundDisplay();
-  //endScreen(currentFruit);
 }
 
 void mouseClicked() {
+  if (mouseButton == RIGHT) {
+    whichFruit = nextFruitType(currentFruit); 
+  }
   if (mouseButton == LEFT) {
     Fruit fruit = nextFruit(currentFruit);
     currentFruit = fruit;
     listIndex++; 
-    whichFruit = currentFruit.getType();
   if (mouseX >= 100 + fruit.getRad() && mouseX <= 700 - fruit.getRad()) {
     fruit.setX(mouseX); 
     fruits.add(fruit);
@@ -74,26 +75,36 @@ void mainBackgroundDisplay() {
       a.deleteDisplay(a);
       o.deleteDisplay(o);
       t.deleteDisplay(t);
-      for (Fruit f : fruits) {
+      Fruit fr = cherry(); 
+      for (int i = 0; i < fruits.size(); i++) {
+        Fruit f = fruits.get(i); 
+        fr = f; 
         f.display();
         f.move();
         f.overlap(fruits);
-        f.bottom();
-        //f.merge(f);
+        f.bottom(); 
+        f.merge(f);
        }
-       if (listIndex > 2) {
-         endScreen(fruits.get(listIndex - 1));
+       //ArrayList<Fruit> newFruits = fruits; 
+       //if (newFruits.size() > 2){
+       //fr.delete(newFruits);
+       // listIndex--; 
+       // listIndex--; 
+       // fruits = newFruits;
+       //}
+       if (listIndex > 1) {
          println((fruits.get(listIndex - 1)).location.y);
+         endScreen(fruits.get(listIndex - 1));
        }
-       if (endGame == true) {
-          //r = 0;
-          //g = 0;
-          //b = 0;
-          textX = 110;
-          textY = 500;
-          textSize(125);
+       if (endGame == true) { 
+          background(0);
+          textSize(75);
           fill(255);
-          text = "Game Over";
+          text("Score: " + score, width/2 - 100, 300);
+          textSize(125); 
+          fill(255);
+          String game = "Game Over :("; 
+          text(game, width/2 - 310, 500);
         } 
     }
 }
@@ -117,7 +128,7 @@ void beginningScreen() {
   fill(255, 160, 16);
   text = "Suika Game";
   textSize(120);
-  if (keyPressed && key == ' ') {
+  if (keyPressed && key == ENTER) {
      startGame = true;
     }
 }
@@ -126,6 +137,43 @@ void endScreen(Fruit f) {
     if (f.location.y - f.getRad() <= 100) {
       endGame = true;
     }
+}
+
+
+
+
+
+
+String nextFruitType(Fruit f){
+  String s = ""; 
+  currentFruitIndex = (int)(random(types.length - 6));
+  if (currentFruitIndex == 0){
+    s = "Cherry";
+  } else if (currentFruitIndex == 1){
+    s = "Strawberry"; 
+  }  else if (currentFruitIndex == 2){
+    s = "Grape";
+  }  else if (currentFruitIndex == 3){
+    s = "Tangerine";
+  }  else if (currentFruitIndex == 4){
+    s = "Orange";
+  } return s; 
+  
+}
+
+Fruit nextFruit(Fruit f){
+  if (whichFruit.equals("Cherry")){
+    f = cherry(); 
+  } else if (whichFruit.equals("Strawberry")){
+    f =  strawberry(); 
+  }  else if (whichFruit.equals("Grape")){
+    f =  grape(); 
+  }  else if (whichFruit.equals("Tangerine")){
+    f =  tangerine(); 
+  }  else if (whichFruit.equals("Orange")){
+    f = orange(); 
+  } 
+  return f; 
 }
 
 

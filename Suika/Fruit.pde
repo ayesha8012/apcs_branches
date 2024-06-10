@@ -15,6 +15,8 @@ class Fruit{
   Fruit fr;
   float frX;
   float frY;
+  float oldX; 
+  float oldY; 
   int i;
   
   
@@ -136,13 +138,16 @@ class Fruit{
   //  //}
   //}
 
+
 void overlap(ArrayList<Fruit> fruits) {
     if (fruits.size() < 2) {
         return; 
     }
     Fruit currentFruit = fruits.get(fruits.size() - 1);
     float currentY = currentFruit.location.y;
+    oldY = currentY; 
     float currentX = currentFruit.location.x; 
+    oldX = currentX; 
     float currentRad = currentFruit.getRad();
     float otherY = 0;
     float otherX = 0;
@@ -349,149 +354,109 @@ void overlap(ArrayList<Fruit> fruits) {
             acceleration.set(0,0);
             overlapped = true;
             closest = otherFruit;
+            //println(closest.getType()); 
+            //println(currentFruit.getType()); 
+            merged = ((closest.getType().equals(currentFruit.getType())) && !(closest.getType().equals(types[10]))); 
         }
     }
 }
+  
+
+
+
 
 
   
   void merge(Fruit f) {
-    if (overlapped == true) {
-      if (closest.getType() == f.getType()) {
-        merged = true;
+    if (overlapped && merged) {
         overlapped = false;
-        frX = f.location.x;
-        frY = f.location.y;
-        delete();
-        deleteDisplay(f);
-        deleteDisplay(closest);
-        currentMergeIndex = currentFruitIndex + 1;
-        if (currentMergeIndex > 0 && currentMergeIndex <= 10) {
-          returnFruit(currentMergeIndex);
-        }
-          Fruit m = fr;
-          fruits.add(m);
-          displayNewFruit();
-          }
-        }
-        else {
-          return;
+        //ArrayList<Fruit> newFruits = fruits; 
+        //delete(newFruits);
+        //listIndex--; 
+        //listIndex--; 
+        //dzeleteDisplay(f);
+        //deleteDisplay(closest);
+        displayNewFruit(f); 
+    }
+  }
+ 
+  
+  Fruit nextFruit(String s) {
+    //get the type of the fruits you want to merge
+    Fruit f = cherry();  
+    println(s); 
+    String t = nextType(s); 
+    println(t); 
+    Fruit newFruit = cherry(); 
+    if (t.equals(types[1])){
+      f = strawberry();  
+    } if (t.equals(types[2])){
+      f = grape(); 
+    } if (t.equals(types[3])){
+      f = tangerine(); 
+    } if (t.equals(types[4])){
+      f = orange(); 
+    } if (t.equals(types[5])){
+      f = apple(); 
+    } if (t.equals(types[6])){
+      f = pear(); 
+    } if (t.equals(types[7])){
+      f = peach(); 
+    } if (t.equals(types[8])){
+      f = pineapple(); 
+    } if (t.equals(types[9])){
+      f = melon(); 
+    } if (t.equals(types[10])) {
+      f = watermelon(); 
+    } return f; 
+  }
+  
+  void displayNewFruit(Fruit f){
+    f = nextFruit(f.getType()); 
+    f.location.x = oldX; 
+    f.location.y = oldY; 
+    f.display();
+  }
+  
+  String nextType(String t){
+    if (t.equals(types[0])){
+      return types[1]; 
+    } if (t.equals(types[1])){
+      return types[2]; 
+    } if (t.equals(types[2])){
+      return types[3]; 
+    } if (t.equals(types[3])){
+      return types[4]; 
+    } if (t.equals(types[4])){
+      return types[5]; 
+    } if (t.equals(types[5])){
+      return types[6]; 
+    } if (t.equals(types[6])){
+      return types[7]; 
+    } if (t.equals(types[7])){
+      return types[8]; 
+    } if (t.equals(types[8])){
+      return types[9]; 
+    } if (t.equals(types[9])){
+      return types[10]; 
+    } else {
+      return types[10]; 
     }
   }
   
-  void returnFruit(int c) {
-     if (c == 1) {
-      fr = strawberry();
-    }
-    else if (c == 2) {
-      fr = grape();
-    }
-    else if (c == 3) {
-      fr = tangerine();
-    }
-    else if (c == 4) {
-      fr = orange();
-    }
-    else if (c == 5) {
-      fr = apple();
-    }
-    else if (c == 6) {
-      fr = pear();
-    }
-    else if (c == 7) {
-      fr = peach();
-    }
-    else if (c == 8) {
-      fr = pineapple();
-    }
-    else if (c == 9) {
-      fr = melon();
-    }
-    else if (c == 10) {
-     fr = watermelon();
+  void roll(ArrayList<Fruit> fr, Fruit f) {
+    if (overlapped == true) {
+      
     }
   }
   
-  
-  void displayNewFruit() {
-    Fruit f = cherry();
-    if (currentMergeIndex == 1) {
-      f = strawberry();
-      f.location.set(frX, frY);
-      strawberry().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 2) {
-      f = grape();
-      f.location.set(frX, frY);
-      grape().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 3) {
-      f = tangerine();
-      f.location.set(frX, frY);
-      tangerine().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 4) {
-      f = orange();
-      f.location.set(frX, frY);
-      orange().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 5) {
-      f = apple();
-      f.location.set(frX, frY);
-      apple().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 6) {
-      f = pear();
-      f.location.set(frX, frY);
-      pear().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 7) {
-      f = peach();
-      f.location.set(frX, frY);
-      peach().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 8) {
-      f = pineapple();
-      f.location.set(frX, frY);
-      pineapple().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 9) {
-      f = melon();
-      f.location.set(frX, frY);
-      melon().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 10) {
-      f = watermelon();
-      f.location.set(frX, frY);
-      watermelon().display();
-      overlap(fruits);
-    }
-    else if (currentMergeIndex == 11) {
-      currentMergeIndex = 0;
-    }
-  }
-  
-  //void roll(Arraylist<Fruits> Fruit, Fruit f) {
-  //  if (overlapped == true) {
-  //    if (currentY > otherY
-  //  }
-  //}
-  
-  void delete() {
-    if (merged == true) {
+   void delete(ArrayList<Fruit> fruits) {
+    Fruit f = fruits.get(fruits.size() - 1);
     fruits.remove(fruits.size() - 1);
-    fruits.remove(currentMergeIndex);
+    fruits.remove(currentMergeIndex); 
+    String nt = nextType(f.getType()); 
+    fruits.add(nextFruit(nt)); 
     merged = false;
-    }
   }
 
 

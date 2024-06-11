@@ -23,9 +23,11 @@ class Fruit{
   float currentX;
   float otherX;
   float overlappedIndex;
+  int m; 
+  boolean isTouching = false; 
   
   
- Fruit(int rad, float face, int col, int xPos, int yPos, float xVel, float yVel, String type, int index) {  
+ Fruit(int rad, float face, int mass, int col, int xPos, int yPos, float xVel, float yVel, String type, int index) {  
     location = new PVector(x, y); 
     velocity = new PVector(xVel, yVel);
     c = col; 
@@ -35,6 +37,16 @@ class Fruit{
     x = xPos; 
     y = yPos; 
     i = index;
+    m = mass; 
+  }
+  
+  public boolean isTouch(Fruit a, Fruit b){
+    if (a.location.x + a.getRad() == b.location.x - b.getRad()){
+      isTouching = true; 
+    } if (a.location.x - a.getRad() == b.location.x + b.getRad()){
+      isTouching = true; 
+    }
+    return isTouching; 
   }
   
   public void setIndex(int index) {
@@ -316,15 +328,42 @@ void overlap(ArrayList<Fruit> fruits) {
                 }
               }
             }
-            currentFruit.location.set(currentX, currentY);
-            velocity.set(0, 0);
-            acceleration.set(0,0);
             overlapped = true;
             closest = otherFruit;
             merged = ((closest.getType().equals(currentFruit.getType())) && !(closest.getType().equals(types[10]))); 
+            currentFruit.location.set(currentX, currentY);
+            int m1 = currentFruit.m; 
+            int m2 = otherFruit.m; 
+            PVector v1 = currentFruit.velocity; 
+            PVector v2 = otherFruit.velocity; 
+            PVector finalV; 
+            //currentFruit.heading(otherFruit); 
+            //currentFruit.velocity.set(0, 0);
+//acceleration.set(0,0);
+            if (merged == false){
+           // while (checkFruitNextToIt(fruits)){
+                PVector v;
+                float yDiff = Math.abs(currentY - otherY); 
+                float xDiff = Math.abs(currentX - otherX); 
+                float angle = atan2(yDiff, xDiff); 
+                v = PVector.fromAngle(angle);
+                //v.mult(-1); 
+                //currentFruit.location.add(v);
+                //currentFruit.location.add(currentFruit.velocity);
+                //currentFruit.velocity.add(currentFruit.acceleration); 
+            //}
+            }
         }
     }
 }
+
+
+
+// collision velocity  formula 
+  // rotate and heading 
+  // .rotate 
+  // .heading 
+  // subtractor which PVector of the location or velocity 
   
   void merge(Fruit f) {
     if (overlapped && merged) {
@@ -408,60 +447,57 @@ void overlap(ArrayList<Fruit> fruits) {
     }
   }
   
-  void roll(ArrayList<Fruit> fruits) {
-    if (overlapped == true) {
-      if (checkFruitNextToIt(fruits) == false) {
-        if (currentX < otherX) {
-          if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 4))) {
-                if (currentX < otherX - (otherFruit.getRad())) {
-                  velocity.set(2, 2);
-                  acceleration.set(0, 0);
-                  overlapped = false;
-                  overlap(fruits);
-                }
-                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 5))) {
-                  velocity.set(2, 2);
-                  acceleration.set(0, 0);
-                  overlapped = false;
-                  overlap(fruits);
-                }
-                if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
-                  velocity.set(2, 2);
-                  acceleration.set(0, 0);
-                  overlapped = false;
-                  overlap(fruits);
-                }
-            }
-          }
-             if (currentX > otherX) {
-                if (currentX > otherX + (otherFruit.getRad())) {
-                  velocity.set(2, 2);
-                  acceleration.set(0, 0);
-                  overlapped = false;
-                  overlap(fruits);
-                }
-                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/5)) {
-                  velocity.set(2, 2);
-                  acceleration.set(0, 0);
-                  overlapped = false;
-                  overlap(fruits);
-                }
-                if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
-                  velocity.set(2, 2);
-                  acceleration.set(0, 0);
-                  overlapped = false;
-                  overlap(fruits);
-                }
-            }
-         }
-      }
-  }
+  //void roll(ArrayList<Fruit> fruits) {
+  //  if (overlapped == true) {
+  //    if (checkFruitNextToIt(fruits) == false) {
+  //      if (currentX < otherX) {
+  //        if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 4))) {
+  //              if (currentX < otherX - (otherFruit.getRad())) {
+  //                velocity.set(2, 2);
+  //                acceleration.set(0, 0);
+  //                overlapped = false;
+  //                overlap(fruits);
+  //              }
+  //              if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 5))) {
+  //                velocity.set(2, 2);
+  //                acceleration.set(0, 0);
+  //                overlapped = false;
+  //                overlap(fruits);
+  //              }
+  //              if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
+  //                velocity.set(2, 2);
+  //                acceleration.set(0, 0);
+  //                overlapped = false;
+  //                overlap(fruits);
+  //              }
+  //          }
+  //        }
+  //           if (currentX > otherX) {
+  //              if (currentX > otherX + (otherFruit.getRad())) {
+  //                velocity.set(2, 2);
+  //                acceleration.set(0, 0);
+  //                overlapped = false;
+  //                overlap(fruits);
+  //              }
+  //              if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/5)) {
+  //                velocity.set(2, 2);
+  //                acceleration.set(0, 0);
+  //                overlapped = false;
+  //                overlap(fruits);
+  //              }
+  //              if (currentX > otherX + (otherFruit.getRad()) + (otherFruit.getRad()/4)) {
+  //                velocity.set(2, 2);
+  //                acceleration.set(0, 0);
+  //                overlapped = false;
+  //                overlap(fruits);
+  //              }
+  //          }
+  //       }
+  //    }
+  //}
   
-  // collision velocity  formula 
-  // rotate and heading 
-  // .rotate 
-  // .heading 
-  // subtractor which PVector of the location or velocity 
+  
+  
   
   boolean checkFruitNextToIt(ArrayList<Fruit> fruits) {
       float distanceX = 0;

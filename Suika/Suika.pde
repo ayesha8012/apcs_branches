@@ -75,18 +75,19 @@ void mainBackgroundDisplay() {
       a.deleteDisplay(a);
       o.deleteDisplay(o);
       t.deleteDisplay(t);
-      Fruit fr = cherry(); 
+      //Fruit fr = cherry(); 
       for (int i = 0; i < fruits.size(); i++) {
         Fruit f = fruits.get(i); 
-        fr = f; 
+        //fr = f; 
         f.display();
         f.move();
         f.overlap(fruits);
         f.bottom(); 
         f.merge(f);
+        f.roll(fruits); 
        }
        if (listIndex > 1) {
-         println((fruits.get(listIndex - 1)).location.y);
+         //println((fruits.get(listIndex - 1)).location.y);
          endScreen(fruits.get(listIndex - 1));
        }
        if (endGame == true) { 
@@ -138,7 +139,7 @@ void endScreen(Fruit f) {
 
 
 String nextFruitType(Fruit f){
-  String s = ""; 
+  String s = f.getType();  
   currentFruitIndex = (int)(random(types.length - 6));
   if (currentFruitIndex == 0){
     s = "Cherry";

@@ -23,12 +23,11 @@ class Fruit{
   float currentX;
   float otherX;
   float overlappedIndex;
-  //boolean moveable;
   
   
  Fruit(int rad, float face, int col, int xPos, int yPos, float xVel, float yVel, String type, int index) {  
     location = new PVector(x, y); 
-    velocity = new PVector(0, 2);
+    velocity = new PVector(xVel, yVel);
     c = col; 
     f = face; 
     r = rad; 
@@ -193,7 +192,6 @@ void overlap(ArrayList<Fruit> fruits) {
                 }
                 if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 4))) {
                   currentY += (otherFruit.getRad() / 10);
-                  roll(fruits, currentFruit);
                 }
                 if (currentX < otherX - (otherFruit.getRad() - (otherFruit.getRad() / 3))) {
                   currentY += (otherFruit.getRad() / 9);
@@ -345,7 +343,7 @@ void overlap(ArrayList<Fruit> fruits) {
     println(s); 
     String t = nextType(s); 
     println(t); 
-    Fruit newFruit = cherry(); 
+    //Fruit newFruit = cherry(); 
     if (t.equals(types[1])){
       f = strawberry();  
     } if (t.equals(types[2])){
@@ -412,7 +410,7 @@ void overlap(ArrayList<Fruit> fruits) {
   
   void roll(ArrayList<Fruit> fruits) {
     if (overlapped == true) {
-      if (checkFruitNextToIt == false) {
+      if (checkFruitNextToIt(fruits) == false) {
         if (currentX < otherX) {
           if (currentX < otherX - (otherFruit.getRad() + (otherFruit.getRad() / 4))) {
                 if (currentX < otherX - (otherFruit.getRad())) {
@@ -458,22 +456,33 @@ void overlap(ArrayList<Fruit> fruits) {
          }
       }
   }
-}
+  
+  // collision velocity  formula 
+  // rotate and heading 
+  // .rotate 
+  // .heading 
+  // subtractor which PVector of the location or velocity 
   
   boolean checkFruitNextToIt(ArrayList<Fruit> fruits) {
       float distanceX = 0;
       float requiredDistance = 0;
+      Fruit otherFruitNew = cherry(); 
+      otherFruit = otherFruitNew; 
       for (int i = 0; i < fruits.size() - 1; i++) {
         if ( i != overlappedIndex) {
           otherFruit = fruits.get(i);
+          print(otherFruit.location.x); 
         }
-        otherX = otherFruit.getLocation.x;
+        if (otherFruit.location.x > 0){
+        otherX = otherFruit.location.x;
+        }
         distanceX = Math.abs(currentX - otherX);
+        print(currentFruit.getRad()); 
         requiredDistance = currentFruit.getRad() + otherFruit.getRad();
         if (distanceX < requiredDistance) {
           return false;
         } 
-    }
+      }
     return true;
   }
 

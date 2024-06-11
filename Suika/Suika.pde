@@ -85,13 +85,6 @@ void mainBackgroundDisplay() {
         f.bottom(); 
         f.merge(f);
        }
-       //ArrayList<Fruit> newFruits = fruits; 
-       //if (newFruits.size() > 2){
-       //fr.delete(newFruits);
-       // listIndex--; 
-       // listIndex--; 
-       // fruits = newFruits;
-       //}
        if (listIndex > 1) {
          println((fruits.get(listIndex - 1)).location.y);
          endScreen(fruits.get(listIndex - 1));
@@ -101,7 +94,7 @@ void mainBackgroundDisplay() {
           textSize(75);
           fill(255);
           text("Score: " + score, width/2 - 100, 300);
-          textSize(125); 
+          textSize(112); 
           fill(255);
           String game = "Game Over :("; 
           text(game, width/2 - 310, 500);

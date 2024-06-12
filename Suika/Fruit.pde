@@ -96,17 +96,26 @@ void collide(Fruit other) {
     currentFruit.velocity = new PVector(0, currentFruit.velocity.mag());
     other.velocity = new PVector(0, other.velocity.mag());
     
-    PVector relativeVelocity = PVector.sub(otherFruit.velocity, currentFruit.velocity);
+    PVector relativeVelocity = PVector.sub(other.velocity, currentFruit.velocity);
     
-    // Compute angle of relative velocity
     float angle = relativeVelocity.heading();
     
-    // Rotate velocity by 180 degrees
-    relativeVelocity.rotate(PI);
+    relativeVelocity.rotate(angle);
     
-    // Apply velocity adjustment
     currentFruit.velocity.add(relativeVelocity);
-    otherFruit.velocity.add(relativeVelocity);
+    other.velocity.add(relativeVelocity);
+      PVector finalVel1 = new PVector(1,0);
+      PVector finalVel2 = new PVector(1,0);
+      float mag1 = (2 * this.getMass()) / (this.getMass() + other.getMass()) * this.velocity.mag() - (this.getMass() - other.getMass()) / (this.getMass() + other.getMass()) * other.velocity.mag();
+      finalVel1.setMag(mag1*.3);
+      float mag2 = (this.getMass() - other.getMass()) / (this.getMass() + other.getMass()) * this.velocity.mag() + (2 * other.getMass()) / (this.getMass() + other.getMass()) * other.velocity.mag();
+      finalVel2.setMag(mag2*.3);
+      float heading = this.location.copy().sub(other.location).heading();
+      finalVel1.rotate(heading);
+      finalVel2.rotate(heading+3.1415);
+      this.velocity = finalVel1;
+      other.velocity = finalVel2;
+      //velocity.add(new PVector.div(new PVector(0, fruit.mass * 0.1), mass));
 
 }
 
@@ -406,8 +415,8 @@ void overlap(ArrayList<Fruit> fruits) {
               }
             }
             currentFruit.location.set(currentX, currentY);
-            currentFruit.velocity.set(0, 0);
-            acceleration.set(0,0);
+            currentFruit.velocity.set(0, 10);
+            acceleration.set(0,1);
             overlapped = true;
             closest = otherFruit;
             merged = ((closest.getType().equals(currentFruit.getType()))

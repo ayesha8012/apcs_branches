@@ -75,20 +75,17 @@ void mainBackgroundDisplay() {
       a.deleteDisplay(a);
       o.deleteDisplay(o);
       t.deleteDisplay(t);
-      //Fruit fr = cherry(); 
       for (int i = 0; i < fruits.size(); i++) {
         Fruit f = fruits.get(i); 
-        //fr = f; 
         f.display();
         f.move();
         f.overlap(fruits);
         f.bottom(); 
         f.merge(f);
-        //f.collide(f); 
+        //f.collide(closest); 
        }
        if (listIndex > 1) {
-         //println((fruits.get(listIndex - 1)).location.y);
-         endScreen(fruits.get(listIndex - 1));
+         endScreen(fruits.get(listIndex - 2));
        }
        if (endGame == true) { 
           background(0);
@@ -234,26 +231,6 @@ Fruit watermelon(){
   return new Fruit(76, 19, 20, color(38, 207, 32), fruitX, fruitY, 0, 2, "Watermelon", 10);
 }
 
-//Fruit nextFruit(Fruit f){
-//  currentFruitIndex = (int)(random(types.length - 6));
-//  if (currentFruitIndex == 0){
-//    f =  cherry(); 
-//    whichFruit = "Cherry";
-//  } else if (currentFruitIndex == 1){
-//    f =  strawberry(); 
-//    whichFruit = "Strawberry";
-//  }  else if (currentFruitIndex == 2){
-//    f =  grape(); 
-//    whichFruit = "Grape";
-//  }  else if (currentFruitIndex == 3){
-//    f =  tangerine(); 
-//    whichFruit = "Tangerine";
-//  }  else if (currentFruitIndex == 4){
-//    f = orange(); 
-//    whichFruit = "Orange";
-//  } 
-//  return f; 
-//}
 
 void updateScore(){
   if (currentFruitIndex == 0){

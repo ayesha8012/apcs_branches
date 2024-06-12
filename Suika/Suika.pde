@@ -74,21 +74,23 @@ void mainBackgroundDisplay() {
       a.deleteDisplay(a);
       o.deleteDisplay(o);
       t.deleteDisplay(t);
-      //Fruit fr = cherry(); 
       for (int i = 0; i < fruits.size(); i++) {
         Fruit f = fruits.get(i); 
-        //fr = f; 
         f.display();
         f.move();
         f.overlap(fruits);
         f.side();
         f.bottom(); 
+        //f.overlap(fruits);
         f.merge(f);
-        f.mergeAll(fruits);
-        //f.collide(f); 
+        //f.mergeAll(fruits);
        }
        if (listIndex > 1) {
          endScreen(fruits.get(listIndex - 1));
+        //f.collide(closest); 
+       }
+       if (listIndex > 1) {
+         endScreen(fruits.get(listIndex - 2));
        }
        if (endGame == true) { 
           background(0);
@@ -102,7 +104,6 @@ void mainBackgroundDisplay() {
         } 
     }
 }
-
 
 void beginningScreen() {
   r = 255;
@@ -164,7 +165,6 @@ Fruit nextFruit(Fruit f){
   } 
   return f; 
 }
-
 
 void drawContainer(){
   stroke(0);

@@ -79,10 +79,10 @@ void mainBackgroundDisplay() {
         f.display();
         f.move();
         f.overlap(fruits);
-        f.side();
+        //f.side();
         f.bottom(); 
         //f.overlap(fruits);
-        f.merge(f);
+        f.merge(f); 
         //f.mergeAll(fruits);
        }
        if (listIndex > 1) {
@@ -180,52 +180,52 @@ Fruit cherry(){
 
 Fruit strawberry(){
   currentFruitIndex = 1; 
-  return new Fruit(22, 5.5, 11, color(241, 98, 64), fruitX, fruitY, 0, 2, "Strawberry", 1); 
+  return new Fruit(22, 5.5, 10, color(241, 98, 64), fruitX, fruitY, 0, 2, "Strawberry", 1); 
 }
 
 Fruit grape(){
   currentFruitIndex = 2; 
-  return new Fruit(28, 7, 12, color(198, 55, 238), fruitX, fruitY, 0, 2, "Grape", 2); 
+  return new Fruit(28, 7, 10, color(198, 55, 238), fruitX, fruitY, 0, 2, "Grape", 2); 
 }
 
 Fruit tangerine(){
   currentFruitIndex = 3; 
-  return new Fruit(34, 8.5, 13, color(255, 203, 80), fruitX, fruitY, 0, 2, "Tangerine", 3); 
+  return new Fruit(34, 8.5, 10, color(255, 203, 80), fruitX, fruitY, 0, 2, "Tangerine", 3); 
 }
 
 Fruit orange(){
   currentFruitIndex = 4;
-  return new Fruit(40, 10, 14, color(252, 153, 24), fruitX, fruitY, 0, 2, "Orange", 4); 
+  return new Fruit(40, 10, 10, color(252, 153, 24), fruitX, fruitY, 0, 2, "Orange", 4); 
 }
 
 Fruit apple(){
   currentFruitIndex = 5; 
-  return new Fruit(46, 11.5, 15, color(250, 10, 10), fruitX, fruitY, 0, 2, "Apple", 5); 
+  return new Fruit(46, 11.5, 10, color(250, 10, 10), fruitX, fruitY, 0, 2, "Apple", 5); 
 }
 
 Fruit pear(){
   currentFruitIndex = 6; 
-  return new Fruit(52, 13, 16, color(247, 183, 7), fruitX, fruitY, 0, 2, "Pear", 6); 
+  return new Fruit(52, 13, 10, color(247, 183, 7), fruitX, fruitY, 0, 2, "Pear", 6); 
 }
 
 Fruit peach(){
   currentFruitIndex = 7; 
-  return new Fruit(58, 14.5, 17, color(228, 145, 215), fruitX, fruitY, 0, 2, "Peach", 7); 
+  return new Fruit(58, 14.5, 10, color(228, 145, 215), fruitX, fruitY, 0, 2, "Peach", 7); 
 }
 
 Fruit pineapple(){
   currentFruitIndex = 8;
-  return new Fruit(64, 16, 18, color(247, 220, 84), fruitX, fruitY, 0, 2, "Pineapple", 8); 
+  return new Fruit(64, 16, 10, color(247, 220, 84), fruitX, fruitY, 0, 2, "Pineapple", 8); 
 }
 
 Fruit melon(){
   currentFruitIndex = 9; 
-  return new Fruit(70, 17.5, 19, color(158, 241, 118), fruitX, fruitY, 0, 2, "Melon", 9); 
+  return new Fruit(70, 17.5, 10, color(158, 241, 118), fruitX, fruitY, 0, 2, "Melon", 9); 
 }
 
 Fruit watermelon(){
   currentFruitIndex = 10; 
-  return new Fruit(76, 19, 20, color(38, 207, 32), fruitX, fruitY, 0, 2, "Watermelon", 10);
+  return new Fruit(76, 19, 10, color(38, 207, 32), fruitX, fruitY, 0, 2, "Watermelon", 10);
 }
 
 void updateScore(){

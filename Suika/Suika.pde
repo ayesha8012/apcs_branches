@@ -84,6 +84,7 @@ void mainBackgroundDisplay() {
         f.overlap(fruits);
         f.bottom(); 
         f.merge(f);
+        //f.collide(f); 
        }
        if (listIndex > 1) {
          //println((fruits.get(listIndex - 1)).location.y);
